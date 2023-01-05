@@ -5,7 +5,7 @@ export default function ProfileButton() {
   const isLoggedIn = false;
   return (
     <div>
-      {isLoggedIn ? <DropdownList /> : <Link href="/login">Se connecter</Link>}
+      {!isLoggedIn ? <DropdownList /> : <Link href="/login">Se connecter</Link>}
     </div>
   );
 }
