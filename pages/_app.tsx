@@ -4,9 +4,11 @@ import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div>
+    <div className="w-full h-full">
       <Header />
-      <Component {...pageProps} />
+      <div className="w-full h-[calc(100%-48px)]">
+        <Component {...pageProps} />
+      </div>
     </div>
   );
 }

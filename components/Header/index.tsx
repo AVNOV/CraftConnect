@@ -1,10 +1,11 @@
+import Link from "next/link";
 import ProfileButton from "./ProfileButton";
 
 export default function Header() {
   return (
-    <header>
-      <nav>
-        <span>CraftConnect</span>
+    <header className="w-full bg-red">
+      <nav className="flex justify-between items-center text-white px-5 py-2">
+        <Link href='/' className="text-2xl">CraftConnect</Link>
         <ProfileButton />
       </nav>
     </header>

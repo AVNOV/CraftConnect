@@ -1,7 +1,11 @@
+import Link from "next/link";
+import DropdownList from "./DropdownList";
+
 export default function ProfileButton() {
-    return (
-        <div>
-            Se connecter
-        </div>
-    )
+  const isLoggedIn = false;
+  return (
+    <div>
+      {isLoggedIn ? <DropdownList /> : <Link href="/login">Se connecter</Link>}
+    </div>
+  );
 }
