@@ -6,8 +6,10 @@ import Image from "next/image";
 import arrow_icon from "../../../../assets/icons/arrow_icon.svg";
 import profile_picture from "../../../../assets/images/profile_picture.png";
 import Item from "./Item";
+import { useAppSelector } from "../../../../store";
 
 export default function DropdownList() {
+  const user: UserType = useAppSelector((store) => store.auth.user);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const arrowRef = useRef<HTMLImageElement>(null);
 
@@ -28,11 +30,6 @@ export default function DropdownList() {
     ],
     []
   );
-  const user: UserType = {
-    firtname: "Pablo",
-    lastname: "Neruda",
-    email: "pablo.neruda@gmail.com",
-  };
 
   const openDropdown = () => {
     const dropdown: HTMLUListElement = dropdownRef.current!;
@@ -61,7 +58,7 @@ export default function DropdownList() {
           src={profile_picture}
           alt="profile picture"
         />
-        <span>{user.firtname}</span>
+        <span>{user.firstname}</span>
         <Image
           ref={arrowRef}
           className="w-3 transition-transform duration-700"
