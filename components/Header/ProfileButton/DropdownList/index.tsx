@@ -40,9 +40,11 @@ export default function DropdownList() {
 
     if (dropdown.style.opacity === "1") {
       dropdown.style.opacity = "0";
+      dropdown.style.pointerEvents = "none";
       arrow.style.transform = "rotateX(0deg)";
     } else {
       dropdown.style.opacity = "1";
+      dropdown.style.pointerEvents = "auto";
       arrow.style.transform = "rotateX(180deg)";
     }
   };
@@ -69,7 +71,7 @@ export default function DropdownList() {
       </div>
       <ul
         ref={dropdownRef}
-        className="absolute z-10 bg-white mt-2 overflow-hidden text-sm opacity-0 top-full text-black shadow-dropdownlist rounded transition-opacity duration-500"
+        className="absolute z-10 bg-white mt-2 overflow-hidden text-sm opacity-0 pointer-events-none top-full text-black shadow-dropdownlist rounded transition-opacity duration-500"
       >
         {displayListItems}
       </ul>
