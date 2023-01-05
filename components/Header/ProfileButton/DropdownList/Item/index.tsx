@@ -1,5 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAppDispatch } from "../../../../../store";
+
+import { logout } from "../../../../../slices/auth.slice";
 
 type props = {
   text: string;
@@ -8,11 +10,13 @@ type props = {
 
 export default function Item({ text, href }: props) {
   const router = useRouter();
-  const handleClick = () => {
-    if(href !== '/logout') {
-        router.push(href);
-    } else {
+  const dispatch = useAppDispatch();
 
+  const handleClick = () => {
+    if (href !== "/logout") {
+      router.push(href);
+    } else {
+      dispatch(logout());
     }
   };
 
