@@ -2,8 +2,8 @@ import Head from 'next/head'
 import LoginRegister from '../components/LoginRegister'
 
 export default function Login() {
-    const onSubmit = (email: string, password: string) => {
-        console.log(email, password)
+    const onSubmit = (data: any) => {
+        console.log(data)
     }
 
   return (
