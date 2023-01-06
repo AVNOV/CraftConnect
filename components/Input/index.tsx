@@ -1,3 +1,5 @@
+import { useForm } from "react-hook-form";
+
 type InputProps = {
     name: string;
     label: string;
@@ -8,7 +10,7 @@ type InputProps = {
 }
 
 export default function Input(props: InputProps) {
-    // const { register, formState: errors } = useForm();
+    const { formState: errors } = useForm();
     const { name, label, type, value, onChange } = props;
 
     return (

@@ -4,12 +4,13 @@ import Button from "../Button";
 
 type LoginRegisterProps = {
   title: string;
+  buttonText: string;
   onSubmit: (data: any) => void;
 };
 
 export default function LoginRegister(props: LoginRegisterProps) {
   const { register, handleSubmit, formState: errors, control } = useForm();
-  const { title } = props;
+  const { title, buttonText } = props;
   const onSubmit = (data: any) => {
     props.onSubmit(data);
   };
@@ -25,7 +26,7 @@ export default function LoginRegister(props: LoginRegisterProps) {
                 name="email"
                 control={control}
                 render={({ field }) => (
-                  <Input label="Email" type="email" {...field} />
+                  <Input required label="Email" type="email" {...field} />
                 )}
               />
                <Controller
@@ -37,7 +38,7 @@ export default function LoginRegister(props: LoginRegisterProps) {
               />
             </div>
             <div className="flex items-center justify-between my-6">
-              <Button type="submit">Se connecter</Button>
+              <Button type="submit">{buttonText}</Button>
             </div>
           </form>
         </div>

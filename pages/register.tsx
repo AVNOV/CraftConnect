@@ -15,7 +15,7 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='bg-red my-auto'>
-        <LoginRegister onSubmit={onSubmit} title="Connection" buttonText='Se connecter' />
+        <LoginRegister onSubmit={onSubmit} title="Inscription" buttonText={`S'inscrire`} />
       </main>
     </>
   )
