@@ -16,7 +16,7 @@ export default function LoginRegister(props: LoginRegisterProps) {
   };
 
   return (
-    <div className="flex">
+    <div className="w-full my-auto">
       <div className="flex flex-col justify-center items-center my-36 w-full">
         <div className="text-3xl font-bold text-white mb-2">{title}</div>
         <div className="w-1/3 h-full rounded-lg p-4 shadow-lg bg-white-50%">

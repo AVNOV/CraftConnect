@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import LoginRegister from '../components/LoginRegister'
+import InformationForm from '../../components/InformationForm'
 
-export default function Login() {
-    const onSubmit = (data: any) => {
-        console.log(data)
-    }
-
+export default function Information() {
+  const onSubmit = (data: any) => {
+    console.log(data)
+}
   return (
     <>
       <Head>
@@ -14,8 +13,8 @@ export default function Login() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='bg-red my-auto'>
-        <LoginRegister onSubmit={onSubmit} title="Inscription" buttonText={`S'inscrire`} />
+      <main className='flex bg-red h-full'>
+       <InformationForm onSubmit={onSubmit} buttonText={`Valider`} />
       </main>
     </>
   )
