@@ -3,6 +3,7 @@ import Input from "../Input";
 import Button from "../Button";
 import Tabs from "../Tabs";
 import { useState } from "react";
+import Dropdown from "../Autocomplete";
 
 type InformationFormProps = {
   title?: string;
@@ -17,7 +18,16 @@ export default function InformationForm(props: InformationFormProps) {
     props.onSubmit(data);
   };
 
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ];
   const [selectedTab, setSelectedTab] = useState("Particulier");
+
+  const handleChange = (option: { value: string, label: string }) => {
+    console.log(option);
+  };
 
   return (
     <div className="w-full my-auto">
@@ -31,7 +41,7 @@ export default function InformationForm(props: InformationFormProps) {
         <div className="w-1/3 h-full rounded-lg p-4 shadow-lg bg-white-50%">
           {selectedTab === "Particulier" ? (
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-2/3 mx-auto pt-10">
+              <div className="w-2/3 mx-auto pt-5">
                 <Controller
                   name="lastname"
                   control={control}
@@ -67,7 +77,7 @@ export default function InformationForm(props: InformationFormProps) {
             </form>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-2/3 mx-auto pt-10">
+              <div className="w-2/3 mx-auto pt-5">
                 <Controller
                   name="lastname"
                   control={control}
@@ -103,6 +113,7 @@ export default function InformationForm(props: InformationFormProps) {
                     <Input label="Nom entreprise" type="input" {...field} />
                   )}
                 />
+                 <Dropdown title={"Domaine d'expertise"} options={options} onChange={handleChange} />
               </div>
               <div className="flex items-center justify-between my-6">
                 <Button type="submit">{buttonText}</Button>

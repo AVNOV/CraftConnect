@@ -14,7 +14,7 @@ export default function Information() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='flex bg-red h-full'>
-       <InformationForm onSubmit={onSubmit} buttonText={`Valider`} />
+       <InformationForm onSubmit={onSubmit} buttonText={`Valider`} title={"Informations"} />
       </main>
     </>
   )
