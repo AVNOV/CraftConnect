@@ -3,7 +3,7 @@ import Input from "../Input";
 import Button from "../Button";
 import Tabs from "../Tabs";
 import { useState } from "react";
-import Dropdown from "../Autocomplete";
+import { Autocomplete } from "../Autocomplete";
 
 type InformationFormProps = {
   title?: string;
@@ -19,15 +19,11 @@ export default function InformationForm(props: InformationFormProps) {
   };
 
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
   ];
   const [selectedTab, setSelectedTab] = useState("Particulier");
-
-  const handleChange = (option: { value: string, label: string }) => {
-    console.log(option);
-  };
 
   return (
     <div className="w-full my-auto">
@@ -113,7 +109,17 @@ export default function InformationForm(props: InformationFormProps) {
                     <Input label="Nom entreprise" type="input" {...field} />
                   )}
                 />
-                 <Dropdown title={"Domaine d'expertise"} options={options} onChange={handleChange} />
+                <Controller
+                  name="categorySkill"
+                  control={control}
+                  render={({ field, formState: { errors } }) => (
+                    <Autocomplete
+                      options={options}
+                      onChange={(option) => field.onChange(option.value)}
+                      title="Domaine d'activité"
+                    />
+                  )}
+                />
               </div>
               <div className="flex items-center justify-between my-6">
                 <Button type="submit">{buttonText}</Button>

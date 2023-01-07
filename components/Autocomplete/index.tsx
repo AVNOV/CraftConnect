@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface Option {
   value: string;
@@ -11,8 +12,9 @@ interface Props {
   title: string;
 }
 
-const Dropdown: React.FC<Props> = ({ options, onChange, title }) => {
+export const Autocomplete: React.FC<Props> = ({ options, onChange, title }) => {
   const [open, setOpen] = useState(false);
+  const { register, setValue } = useForm();
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
   const toggleOpen = () => {
@@ -30,13 +32,13 @@ const Dropdown: React.FC<Props> = ({ options, onChange, title }) => {
         <label className="block text-white text-base font-bold mb-1">
                 {title}
             </label>
-      <button
+      <div
         onClick={toggleOpen}
         className={`block text-left appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${selectedOption === null ? "text-grey" : "text-gray-600"}`}
       >
         {selectedOption ? selectedOption.label : `choisir`}
         <i className="fas fa-caret-down absolute right-0 mr-4 text-gray-600"></i>
-      </button>
+      </div>
       {open && (
         <ul className="absolute z-50 bg-white rounded-md shadow-lg bottom-0 mt-1 w-full py-1 list-none">
           {options.map((option) => (
@@ -50,8 +52,7 @@ const Dropdown: React.FC<Props> = ({ options, onChange, title }) => {
           ))}
         </ul>
       )}
+      <input name="categorySkill" {...register} type="hidden" />
     </div>
   );
 };
-
-export default Dropdown;
