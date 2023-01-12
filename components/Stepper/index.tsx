@@ -22,13 +22,13 @@ export default function Stepper({ activeStep, steps }: StepperProp) {
               {index + 1}
             </div>
 
-            {index !== steps.length - 1 && (
+            {/* {index !== steps.length - 1 && (
               <div
                 className={`h-1 w-1/2 ${
                   index < activeStep ? "bg-red" : "bg-gray-300"
                 }`}
               ></div>
-            )}
+            )} */}
           </div>
         </div>
       ))}
