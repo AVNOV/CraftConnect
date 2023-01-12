@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import LoginRegister from '../../components/LoginRegister'
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export default function Register() {

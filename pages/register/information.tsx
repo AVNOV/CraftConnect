@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import InformationForm from '../../components/InformationForm'
+import { useRouter } from 'next/router';
 
 export default function Information() {
+  const router = useRouter();
   const onSubmit = (data: any) => {
     console.log(data)
+    router.push('/');
 }
   return (
     <>
