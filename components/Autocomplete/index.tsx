@@ -34,7 +34,7 @@ export const Autocomplete: React.FC<Props> = ({ options, onChange, title, titleC
 
   return (
     <div className="relative inline-block text-left w-full">
-        <label className={`block ${titleColor ? titleColor : "text-white"}text-base font-bold mb-1`}>
+        <label className={`block ${titleColor ? titleColor : "text-white"} text-base font-bold mb-1`}>
                 {title}
             </label>
       <div

@@ -3,6 +3,7 @@ import Stepper from "../../components/Stepper";
 import Button from "../../components/Button";
 import ReasonAppointmentForm from "../../components/AppointmentForm/Reason";
 import Head from "next/head";
+import ContactDetailsForm from "../../components/AppointmentForm/ContactDetails";
 const steps = ["Rendez-vous", "Motif", "Coordonnées", "Confirmation"];
 
 export default function Appointment() {
@@ -30,7 +31,7 @@ export default function Appointment() {
             <div className="mt-4">
               {activeStep === 0 && <p>Contenu de l'étape 1</p>}
               {activeStep === 1 && <ReasonAppointmentForm />}
-              {activeStep === 2 && <p>Contenu de l'étape 3</p>}
+              {activeStep === 2 && <ContactDetailsForm />}
               {activeStep === 3 && <p>Contenu de l'étape 4</p>}
               <div className="flex flex-row mt-4 justify-between ">
                 <div className="mr-5">

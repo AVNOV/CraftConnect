@@ -27,6 +27,7 @@ export default function ReasonAppointmentForm() {
                     onChange={(option) => field.onChange(option.value)}
                     title="Motif du rendez-vous"
                     name="reasonAppointment"
+                    titleColor="text-black"
                   />
                 )}
               />
