@@ -22,7 +22,7 @@ export default function LoginRegister({ title, buttonText }: LoginRegisterProps)
     <div className="w-full my-auto">
       <div className="flex flex-col justify-center items-center w-full">
         <div className="text-3xl font-bold text-white mb-2">{title}</div>
-        <div className="w-2/4 h-full rounded-lg p-4 shadow-lg bg-white-50%">
+        <div className="w-1/4 h-full rounded-lg p-4 shadow-lg bg-white-50%">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="w-2/3 mx-auto pt-5">
               <Controller
