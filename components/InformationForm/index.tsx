@@ -11,11 +11,10 @@ type InformationFormProps = {
   onSubmit: (data: any) => void;
 };
 
-export default function InformationForm(props: InformationFormProps) {
+export default function InformationForm({ title, buttonText }: InformationFormProps) {
   const { register, handleSubmit, formState: errors, control } = useForm();
-  const { title, buttonText } = props;
   const onSubmit = (data: any) => {
-    props.onSubmit(data);
+    onSubmit(data);
   };
 
   const options = [

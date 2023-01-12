@@ -9,9 +9,8 @@ type InputProps = {
     value: string;
 }
 
-export default function Input(props: InputProps) {
+export default function Input({ name, label, type, value, onChange }: InputProps) {
     const { formState: errors } = useForm();
-    const { name, label, type, value, onChange } = props;
 
     return (
         <div className="mb-4">
