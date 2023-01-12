@@ -11,11 +11,8 @@ type InformationFormProps = {
   onSubmit: (data: any) => void;
 };
 
-export default function InformationForm({ title, buttonText }: InformationFormProps) {
+export default function InformationForm({ title, buttonText, onSubmit }: InformationFormProps) {
   const { register, handleSubmit, formState: errors, control } = useForm();
-  const onSubmit = (data: any) => {
-    onSubmit(data);
-  };
 
   const options = [
     { value: "option1", label: "Option 1" },

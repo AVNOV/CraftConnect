@@ -9,14 +9,11 @@ type LoginRegisterProps = {
   onSubmit: (data: any) => void;
 };
 
-export default function LoginRegister({ title, buttonText }: LoginRegisterProps) {
+export default function LoginRegister({ title, buttonText, onSubmit }: LoginRegisterProps) {
   const router = useRouter();
   const linkText = router.pathname === '/register' ? 'Vous avez déjà un compte ?' : 'Vous n\'avez pas encore de compte ?';
   const linkHref = router.pathname === '/register' ? '/login' : '/register';
   const { register, handleSubmit, formState: errors, control } = useForm();
-  const onSubmit = (data: any) => {
-    onSubmit(data);
-  };
 
   return (
     <div className="w-full my-auto">
