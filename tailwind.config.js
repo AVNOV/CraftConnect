@@ -24,6 +24,9 @@ module.exports = {
       boxShadow: {
         dropdownlist: "0px 4px 25px -10px rgba(0, 0, 0, 0.25)",
         searchcard: "5px 5px 28px rgba(0, 0, 0, 0.25);"
+      },
+      invert: {
+        25: '.25',
       }
     },
   },
