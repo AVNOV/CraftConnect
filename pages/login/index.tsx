@@ -15,7 +15,7 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='flex bg-red h-full'>
-        <LoginRegister onSubmit={onSubmit} title="Connection" buttonText='Se connecter' />
+        <LoginRegister onSubmit={onSubmit} title="Connexion" buttonText='Se connecter' />
       </main>
     </>
   )
