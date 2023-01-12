@@ -4,6 +4,9 @@ import Button from "../../components/Button";
 import ReasonAppointmentForm from "../../components/AppointmentForm/Reason";
 import Head from "next/head";
 import ContactDetailsForm from "../../components/AppointmentForm/ContactDetails";
+import ConfirmationAppointmentForm from "../../components/AppointmentForm/Confirmation";
+import Image from "next/image";
+import confirm_icon from "../../assets/icons/confirm_icon.svg";
 const steps = ["Rendez-vous", "Motif", "Coordonnées", "Confirmation"];
 
 export default function Appointment() {
@@ -15,6 +18,10 @@ export default function Appointment() {
 
   const handlePrev = () => {
     setActiveStep((prevStep) => prevStep - 1);
+  };
+
+  const handleSubmit = () => {
+    console.log("submit");
   };
 
   return (
@@ -32,7 +39,7 @@ export default function Appointment() {
               {activeStep === 0 && <p>Contenu de l'étape 1</p>}
               {activeStep === 1 && <ReasonAppointmentForm />}
               {activeStep === 2 && <ContactDetailsForm />}
-              {activeStep === 3 && <p>Contenu de l'étape 4</p>}
+              {activeStep === 3 && <ConfirmationAppointmentForm />}
               <div className="flex flex-row mt-4 justify-between ">
                 <div className="mr-5">
                   {activeStep !== 0 && (
@@ -42,6 +49,18 @@ export default function Appointment() {
                 <div>
                   {activeStep !== steps.length - 1 && (
                     <Button onClick={handleNext}>Suivant</Button>
+                  )}
+                  {activeStep === steps.length - 1 && (
+                    <Button onClick={handleSubmit}>
+                      <div className="flex flex-row">
+                        <Image
+                           className="w-4 mr-2 transition-transform duration-700"
+                          src={confirm_icon}
+                          alt="confirm"
+                        />
+                        Confirmer
+                      </div>
+                    </Button>
                   )}
                 </div>
               </div>
