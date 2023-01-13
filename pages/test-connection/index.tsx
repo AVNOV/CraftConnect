@@ -1,5 +1,5 @@
-import { useGetArtisans } from "../api/query/artisan.query";
-import Button from "../components/Button";
+import { useGetArtisans } from "../../api/query/artisan.query";
+import Button from "../../components/Button";
 import Head from "next/head";
 
 export default function Test() {
