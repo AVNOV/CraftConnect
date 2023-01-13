@@ -4,7 +4,11 @@ import SearchButton from "./SearchButton";
 
 import { useForm, Controller } from "react-hook-form";
 
-export default function SearchInput() {
+type props = {
+  size?: string;
+};
+
+export default function SearchInput({ size }: props) {
   const { handleSubmit, setValue, control } = useForm({
     defaultValues: {
       artisan: "",
@@ -13,25 +17,25 @@ export default function SearchInput() {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data)
+    console.log(data);
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex rounded overflow-hidden w-fit mt-5"
+      className="flex rounded overflow-hidden w-fit mt-5 shadow-searchcard"
     >
       <Controller
         name="artisan"
         control={control}
-        render={({ field }) => <ArtisanInput {...field} />}
+        render={({ field }) => <ArtisanInput size={size} {...field} />}
       />
       <Controller
         name="location"
         control={control}
-        render={({ field }) => <LocationInput setValue={setValue} {...field} />}
+        render={({ field }) => <LocationInput size={size}  setValue={setValue} {...field} />}
       />
-      <SearchButton />
+      <SearchButton size={size}  />
     </form>
   );
 }
