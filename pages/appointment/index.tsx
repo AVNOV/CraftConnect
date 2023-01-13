@@ -7,7 +7,7 @@ import ContactDetailsForm from "../../components/AppointmentForm/ContactDetails"
 import ConfirmationAppointmentForm from "../../components/AppointmentForm/Confirmation";
 import Image from "next/image";
 import confirm_icon from "../../assets/icons/confirm_icon.svg";
-const steps = ["Rendez-vous", "Motif", "Coordonnées", "Confirmation"];
+const steps = ["Rendez-vous", "Motif RDV", "Coordonnées", "Confirmation"];
 
 export default function Appointment() {
   const [activeStep, setActiveStep] = useState(0);

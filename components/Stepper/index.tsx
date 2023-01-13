@@ -9,7 +9,7 @@ export default function Stepper({ activeStep, steps }: StepperProp) {
   return (
     <div className="flex">
       {steps.map((step, index) => (
-        <div key={step} className={`py-2 px-4 text-center`}>
+        <div key={step} className={`py-2 px-4 text-center mx-4`}>
           <div className={`${index < activeStep ? "text-red" : "text-black"}`}>
             {step}
           </div>
