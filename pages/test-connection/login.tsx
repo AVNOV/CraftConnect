@@ -1,15 +1,26 @@
-import { FormEvent, useState } from 'react'
-import { loginRequest } from '../../api/query/user.query'
-
+import { FormEvent, useState } from "react";
+import { loginRequest } from "../../api/query/user.query";
+import { login } from "../../slices/auth.slice";
+import { useAppDispatch } from "../../store";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const dispatch = useAppDispatch();
+  const [isError, setIsError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    loginRequest( email, password )
-  }
+    e.preventDefault();
+    loginRequest(email, password)
+      .then((response) => {
+        dispatch(login(response));
+        setIsError(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsError(true);
+      });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,6 +37,7 @@ export default function LoginPage() {
         placeholder="Mot de passe"
       />
       <button type="submit">Connexion</button>
+      {isError && <p>Erreur de connexion</p>}
     </form>
-  )
+  );
 }

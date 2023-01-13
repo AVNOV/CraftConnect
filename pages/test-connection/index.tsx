@@ -1,9 +1,10 @@
-import { useGetArtisans } from "../../api/query/artisan.query";
+import { useGetUsers } from "../../api/query/user.query";
 import Button from "../../components/Button";
 import Head from "next/head";
 
+
 export default function Test() {
-  const { data } = useGetArtisans();
+  const { data } = useGetUsers();
   const handleClick = () => {
     console.log(data);
   };
