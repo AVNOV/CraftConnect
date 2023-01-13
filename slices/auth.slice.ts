@@ -3,20 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isLogged: true,
-    user: {
-      firstname: "Pablo",
-      lastname: "Delchoco",
-      email: "pablo.delchoco@gmail.com",
-    },
+    isLogged: false,
+    user: {},
+    access_token: ""
   },
   reducers: {
     login: (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.access_token = action.payload.access_token;
       state.isLogged = true;
     },
     logout: (state) => {
       state.isLogged = false;
+      state.user = {};
+      state.access_token = "";
     },
   },
 });

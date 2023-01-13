@@ -1,25 +1,22 @@
 import { FormEvent, useState } from "react";
 import { loginRequest } from "../../api/query/user.query";
-import { login } from "../../slices/auth.slice";
-import { useAppDispatch } from "../../store";
+import { useAppSelector } from "../../store";
 
 export default function LoginPage() {
-  const dispatch = useAppDispatch();
   const [isError, setIsError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const access_token = useAppSelector((state) => state.auth.access_token);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    loginRequest(email, password)
-      .then((response) => {
-        dispatch(login(response));
-        setIsError(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsError(true);
-      });
+    try {
+      await loginRequest(email, password);
+      setIsError(false);
+    } catch (error) {
+      console.log(error);
+      setIsError(true);
+    }
   };
 
   return (
