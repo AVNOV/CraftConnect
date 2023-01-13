@@ -1,10 +1,4 @@
-import { Controller, useForm } from "react-hook-form";
-import { Autocomplete } from "../../Autocomplete";
-import LargeInput from "../../InputLarge";
-
 export default function ConfirmationAppointmentForm() {
-  const { register, handleSubmit, formState: errors, control } = useForm();
-
   return (
     <div className="w-full my-auto">
       <div className="flex flex-col justify-center items-center w-full">
