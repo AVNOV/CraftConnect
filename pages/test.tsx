@@ -1,9 +1,9 @@
-import { useGetArtisanSkill } from "../api/query/artisan-skill.query";
+import { useGetArtisans } from "../api/query/artisan.query";
 import Button from "../components/Button";
 import Head from "next/head";
 
 export default function Test() {
-  const { data } = useGetArtisanSkill();
+  const { data } = useGetArtisans();
   const handleClick = () => {
     console.log(data);
   };
