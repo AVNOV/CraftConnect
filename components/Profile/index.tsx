@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../Button";
 
 interface User {
   firstName: string;
@@ -115,11 +116,13 @@ export default function ProfileDisplay({ user }: Props) {
               />
             </div>
             {formModified && (
-              <div className="text-center pt-5">
-                <button className="mr-5" onClick={handleCancel}>
-                  Annuler
-                </button>
-                <button onClick={handleSubmit}>Valider</button>
+              <div className="flex justify-center pt-5">
+                <div className="mr-5">
+                  <Button onClick={handleCancel}>Annuler</Button>
+                </div>
+                <div>
+                  <Button onClick={handleSubmit}>Valider</Button>
+                </div>
               </div>
             )}
           </div>
