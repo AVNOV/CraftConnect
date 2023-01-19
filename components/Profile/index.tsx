@@ -64,14 +64,14 @@ export default function ProfileDisplay({ user }: Props) {
 
   return (
     <div className="w-full mx-auto pt-5">
-      <div className="flex flex-col h-2/3 w-2/3 justify-center items-center mx-auto my-auto">
+      <div className="flex flex-col h-1/2 w-1/2 justify-center items-center mx-auto my-auto">
         <div className="h-full rounded-lg p-4 w-full shadow-2xl bg-white">
           <div className="pt-5 h-full">
             <div className="mb-5 text-center text-xl font-medium">
               Informations du compte
             </div>
-            <div className="flex flex-row">
-              <div className="mr-5">
+            <div className="flex flex-row justify-between">
+              <div className="mr-5 mb-5">
                 <div className="text-lg font-medium">Prénom</div>
                 <input
                   className="text-base"
@@ -88,8 +88,8 @@ export default function ProfileDisplay({ user }: Props) {
                 />
               </div>
             </div>
-            <div className="flex flex-row">
-              <div className="mr-5">
+            <div className="flex flex-row justify-between">
+              <div className="mr-5 mb-5">
                 <div className="text-lg font-medium">Email</div>
                 <input
                   className="text-base"
