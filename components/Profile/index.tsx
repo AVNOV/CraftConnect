@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 interface User {
   firstName: string;
@@ -13,38 +13,115 @@ interface Props {
 }
 
 export default function ProfileDisplay({ user }: Props) {
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [email, setEmail] = useState(user.email);
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
+  const [city, setCity] = useState(user.city);
+  const [formModified, setFormModified] = useState(false);
+
+  const handleFirstNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFirstName(event.target.value);
+    setFormModified(true);
+  };
+
+  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLastName(event.target.value);
+    setFormModified(true);
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+    setFormModified(true);
+  };
+
+  const handlePhoneNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPhoneNumber(event.target.value);
+    setFormModified(true);
+  };
+
+  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCity(event.target.value);
+    setFormModified(true);
+  };
+
+  const handleCancel = () => {
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setEmail(user.email);
+    setPhoneNumber(user.phoneNumber);
+    setCity(user.city);
+    setFormModified(false);
+  };
+
+  const handleSubmit = () => {
+    setFormModified(false);
+  };
+
   return (
-    <div className="w-full my-auto">
-      <div className="flex flex-col justify-center items-center w-full">
-        <div className="w-96 h-full rounded-lg p-4 shadow-2xl bg-white">
-          <div className="w-full mx-auto pt-5">
-            <div className="mb-5">
-              <h3>Informations du compte</h3>
+    <div className="w-full mx-auto pt-5">
+      <div className="flex flex-col h-2/3 w-2/3 justify-center items-center mx-auto my-auto">
+        <div className="h-full rounded-lg p-4 w-full shadow-2xl bg-white">
+          <div className="pt-5 h-full">
+            <div className="mb-5 text-center text-xl font-medium">
+              Informations du compte
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row">
               <div className="mr-5">
-                <h3>Prénom</h3>
-                <p>{user.firstName}</p>
+                <div className="text-lg font-medium">Prénom</div>
+                <input
+                  className="text-base"
+                  value={firstName}
+                  onChange={handleFirstNameChange}
+                />
               </div>
               <div>
-                <h3>Nom</h3>
-                <p>{user.lastName}</p>
+                <div className="text-lg font-medium">Nom</div>
+                <input
+                  className="text-base"
+                  value={lastName}
+                  onChange={handleLastNameChange}
+                />
               </div>
             </div>
             <div className="flex flex-row">
               <div className="mr-5">
-                <h3>Email</h3>
-                <p>{user.email}</p>
+                <div className="text-lg font-medium">Email</div>
+                <input
+                  className="text-base"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
               </div>
               <div>
-                <h3>Téléphone</h3>
-                <p>{user.phoneNumber}</p>
+                <div className="text-lg font-medium">Téléphone</div>
+                <input
+                  className="text-base"
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                />
               </div>
             </div>
             <div>
-              <h3>Ville</h3>
-              <p>{user.city}</p>
+              <div className="text-lg font-medium">Ville</div>
+              <input
+                className="text-base"
+                value={city}
+                onChange={handleCityChange}
+              />
             </div>
+            {formModified && (
+              <div className="text-center pt-5">
+                <button className="mr-5" onClick={handleCancel}>
+                  Annuler
+                </button>
+                <button onClick={handleSubmit}>Valider</button>
+              </div>
+            )}
           </div>
         </div>
       </div>
