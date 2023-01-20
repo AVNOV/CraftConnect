@@ -6,9 +6,10 @@ type props = {
   date: Date;
   size: string | undefined;
   isExtended: boolean;
+  bookedDates: string[]
 };
 
-export default function DayColumn({ date, size, isExtended }: props) {
+export default function DayColumn({ date, size, isExtended, bookedDates }: props) {
   const [hours, setHours] = useState<string[]>([]);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function DayColumn({ date, size, isExtended }: props) {
   }, [date, isExtended]);
 
   const displayHourButtons = hours.map((hour, index) => (
-    <HourButton key={index} hour={hour} selectedDate={date} />
+    <HourButton key={index} hour={hour} selectedDate={date} bookedDates={bookedDates} />
   ));
 
   return (

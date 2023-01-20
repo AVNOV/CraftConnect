@@ -8,16 +8,17 @@ import Image from "next/image";
 
 type props = {
   size?: string;
+  bookedDates: string[];
 };
 
-export default function Calendar({ size }: props) {
+export default function Calendar({ size, bookedDates }: props) {
   const [isExtended, setIsExtended] = useState<boolean>(false);
   const [dates, setDates] = useState<Date[]>([]);
   const extendedArrow = useRef<HTMLImageElement>(null);
 
-  const nbDaysDisplayed = size === "small" ? 5 : 7
+  const nbDaysDisplayed: number = size === "small" ? 5 : 7;
 
-  useEffect(() => {
+  useEffect((): void => {
     const newDates: Date[] = [];
     for (let index = 0; index < nbDaysDisplayed; index++) {
       newDates.push(
@@ -29,20 +30,22 @@ export default function Calendar({ size }: props) {
     setDates(newDates);
   }, []);
 
-  const handlePrevioustDays = () => {
+  const handlePrevioustDays = (): void => {
     if (
       moment().format("DD MM YYYY") !==
       moment(dates[0]).subtract(1, "days").format("DD MM YYYY")
     ) {
       const newDates: Date[] = [];
       dates.forEach((date, index) => {
-        newDates[index] = moment(date).subtract(nbDaysDisplayed, "days").toDate();
+        newDates[index] = moment(date)
+          .subtract(nbDaysDisplayed, "days")
+          .toDate();
       });
       setDates(newDates);
     }
   };
 
-  const handleNextDays = () => {
+  const handleNextDays = (): void => {
     const newDates: Date[] = [];
     dates.forEach((date, index) => {
       newDates[index] = moment(date).add(nbDaysDisplayed, "days").toDate();
@@ -50,7 +53,7 @@ export default function Calendar({ size }: props) {
     setDates(newDates);
   };
 
-  const handleExtended = () => {
+  const handleExtended = (): void => {
     if (isExtended) {
       extendedArrow.current!.style.transform = "rotateX(0deg)";
     } else {
@@ -60,7 +63,13 @@ export default function Calendar({ size }: props) {
   };
 
   const displayColumns = dates.map((date, index) => (
-    <DayColumn key={index} date={date} size={size} isExtended={isExtended} />
+    <DayColumn
+      key={index}
+      date={date}
+      size={size}
+      isExtended={isExtended}
+      bookedDates={bookedDates}
+    />
   ));
 
   return (

@@ -1,15 +1,16 @@
 import moment from "moment";
-import { fakeBookedDates } from "./fakeBookedDates";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 type props = {
   selectedDate: Date;
   hour: string;
+  bookedDates: string[];
 };
 
-export default function HourButton({ hour, selectedDate }: props) {
+export default function HourButton({ hour, selectedDate, bookedDates }: props) {
   const [isAlreadyBooked, setIsAlreadyBooked] = useState<boolean>(false);
-  const bookedDates: string[] = fakeBookedDates;
+  const router = useRouter();
 
   useEffect(() => {
     setIsAlreadyBooked(false);
@@ -23,10 +24,26 @@ export default function HourButton({ hour, selectedDate }: props) {
     });
   }, [selectedDate]);
 
+  const handleClick = () => {
+    router.push({
+      pathname: "/booking/reason",
+      query: {
+        date: moment(new Date(selectedDate)).set({
+          hour: Number(hour.slice(0, 2)),
+          minute: Number(hour.slice(2, 4)),
+          millisecond: 0
+        }).toLocaleString(),
+      },
+    });
+  };
+
   return (
     <>
       {!isAlreadyBooked ? (
-        <li className="flex items-center justify-center w-14 h-7 rounded-md cursor-pointer text-sm text-white bg-red-50% hover:bg-red active:scale-95 transition-hourbutton ">
+        <li
+          onClick={handleClick}
+          className="flex items-center justify-center w-14 h-7 rounded-md cursor-pointer text-sm text-white bg-red-50% hover:bg-red active:scale-95 transition-hourbutton "
+        >
           {hour}
         </li>
       ) : (

@@ -12,10 +12,11 @@ type props = {
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   value: string;
+  size?: string;
 };
 
 const LocationInput = forwardRef(
-  ({ name, onChange, value, setValue }: props, ref) => {
+  ({ name, onChange, value, setValue, size }: props, ref) => {
     const handlePosition = () => {
       navigator.geolocation.getCurrentPosition(
         (position: GeolocationPosition) => {
@@ -37,20 +38,28 @@ const LocationInput = forwardRef(
 
     return (
       <div className="flex items-center justify-center bg-white px-2 py-3 border-r">
-        <Image src={marker_icon} alt="" className="w-6 h-6" />
+        <Image
+          src={marker_icon}
+          alt=""
+          className={`${size == "small" ? "w-4 h-4" : "w-6 h-6"}`}
+        />
         <input
           name={name}
           onChange={onChange}
           value={value}
           placeholder="Où ?"
           type="text"
-          className="bg-transparent pl-4 text-lg"
+          className={`bg-transparent pl-4 ${
+            size === "small" ? "text-base" : "text-lg"
+          }`}
         />
         <Image
           onClick={handlePosition}
           src={position_icon}
           alt="current position button"
-          className="w-6 h-6 cursor-pointer active:scale-95 transition-transform"
+          className={`cursor-pointer active:scale-95 transition-transform ${
+            size == "small" ? "w-4 h-4" : "w-6 h-6"
+          }`}
         />
       </div>
     );
