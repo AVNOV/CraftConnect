@@ -4,8 +4,19 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     isLogged: false,
-    user: {},
-    access_token: ""
+    user: {
+      id: -1,
+      firstname: "",
+      lastname: "",
+      email: "",
+      artisan: null,
+      city: "",
+      phone_number: "",
+      role: "",
+      created_at: "",
+      updated_at: "",
+    },
+    access_token: "",
   },
   reducers: {
     login: (state, action) => {
@@ -15,7 +26,18 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       state.isLogged = false;
-      state.user = {};
+      state.user = {
+        id: -1,
+        firstname: "",
+        lastname: "",
+        email: "",
+        artisan: null,
+        city: "",
+        phone_number: "",
+        role: "",
+        created_at: "",
+        updated_at: "",
+      };
       state.access_token = "";
     },
   },
