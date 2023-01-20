@@ -9,7 +9,7 @@ import Item from "./Item";
 import { useAppSelector } from "../../../../store";
 
 export default function DropdownList() {
-  const user: UserType = useAppSelector((store) => store.auth.user);
+  const user: any = useAppSelector((store) => store.auth.user);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const arrowRef = useRef<HTMLImageElement>(null);
 

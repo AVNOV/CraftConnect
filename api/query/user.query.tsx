@@ -4,8 +4,9 @@ import { useAppDispatch } from "../../store";
 import { login } from "../../slices/auth.slice";
 
 
-export const loginRequest = async (email: string, password: string) => {
+export const  loginRequest = async (email: string, password: string) => {
   const { data } = await API.post("/login", { email, password });
+  console.log(email, password, data)
   if (data.access_token) {
     const { user } = data;
     const { access_token } = data;

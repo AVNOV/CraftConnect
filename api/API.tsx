@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useAppSelector } from "../store";
 
 const baseURL = `https://api-craftconnect.onrender.com/`;
 
@@ -12,7 +11,7 @@ const API = axios.create({
 
 API.interceptors.request.use(
   async (config) => {
-    const access_token = useAppSelector((state) => state.auth.access_token);
+    const access_token = localStorage.getItem("access_token");
     if (access_token) {
       config.headers!.Authorization = `Bearer ${access_token}`;
     }
@@ -22,5 +21,4 @@ API.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
 export default API;
