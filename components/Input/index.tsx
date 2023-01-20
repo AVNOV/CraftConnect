@@ -7,14 +7,15 @@ type InputProps = {
     required?: boolean;
     onChange: (value: string) => void;
     value: string;
+    titleColor?: string;
 }
 
-export default function Input({ name, label, type, value, onChange }: InputProps) {
+export default function Input({ name, label, type, value, onChange, titleColor }: InputProps) {
     const { formState: errors } = useForm();
 
     return (
         <div className="mb-4">
-            <label className="block text-white text-base font-bold mb-1">
+            <label className={`block ${titleColor ? titleColor : "text-white"} text-base font-bold mb-1`}>
                 {label}
             </label>
             <input

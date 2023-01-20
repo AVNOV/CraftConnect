@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import arrow_icon from "../../assets/icons/arrow_icon.svg";
 
 interface Option {
   value: string;
@@ -10,9 +12,12 @@ interface Props {
   options: Option[];
   onChange: (option: Option) => void;
   title: string;
+  titleColor?: string;
+  dropdownDirection?: 'up' | 'down';
+  name?: string;
 }
 
-export const Autocomplete: React.FC<Props> = ({ options, onChange, title }) => {
+export const Autocomplete: React.FC<Props> = ({ options, onChange, title, titleColor, dropdownDirection = 'down', name }) => {
   const [open, setOpen] = useState(false);
   const { register, setValue } = useForm();
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
@@ -29,18 +34,23 @@ export const Autocomplete: React.FC<Props> = ({ options, onChange, title }) => {
 
   return (
     <div className="relative inline-block text-left w-full">
-        <label className="block text-white text-base font-bold mb-1">
+        <label className={`block ${titleColor ? titleColor : "text-white"} text-base font-bold mb-1`}>
                 {title}
             </label>
       <div
         onClick={toggleOpen}
-        className={`block text-left appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${selectedOption === null ? "text-grey" : "text-gray-600"}`}
+        className={`flex flex-row justify-between text-left appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${selectedOption === null ? "text-grey" : "text-gray-600"}`}
       >
-        {selectedOption ? selectedOption.label : `choisir`}
-        <i className="fas fa-caret-down absolute right-0 mr-4 text-gray-600"></i>
+        {selectedOption ? selectedOption.label : `Sélectionner`}
+        <Image
+          className="w-3 transition-transform duration-700"
+          src={arrow_icon}
+          alt="arrow"
+        />
+        {/* <i className="fas fa-caret-down absolute right-0 mr-4 text-gray-600"></i> */}
       </div>
       {open && (
-        <ul className="absolute z-50 bg-white rounded-md shadow-lg bottom-0 mt-1 w-full py-1 list-none">
+        <ul className={`absolute z-50 bg-white rounded-md shadow-lg ${dropdownDirection === 'up' ? 'top-0' : 'bottom-0'} mt-1 w-full py-1 list-none`}>
           {options.map((option) => (
             <li
               key={option.value}
@@ -52,7 +62,7 @@ export const Autocomplete: React.FC<Props> = ({ options, onChange, title }) => {
           ))}
         </ul>
       )}
-      <input name="categorySkill" {...register} type="hidden" />
+      <input name={name} {...register} type="hidden" />
     </div>
   );
 };
