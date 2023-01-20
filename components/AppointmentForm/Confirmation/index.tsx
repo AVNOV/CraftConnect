@@ -1,4 +1,14 @@
-export default function ConfirmationAppointmentForm() {
+
+type Props = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  reasonAppointment: string;
+  description: string;
+};
+
+export default function ConfirmationAppointmentForm({firstName, lastName, email, phone, reasonAppointment, description}: Props ) {
   return (
     <div className="w-full my-auto">
       <div className="flex flex-col justify-center items-center w-full">
