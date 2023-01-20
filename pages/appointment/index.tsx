@@ -7,6 +7,7 @@ import ContactDetailsForm from "../../components/AppointmentForm/ContactDetails"
 import ConfirmationAppointmentForm from "../../components/AppointmentForm/Confirmation";
 import Image from "next/image";
 import confirm_icon from "../../assets/icons/confirm_icon.svg";
+import Calendar from "../../components/Calendar";
 const steps = ["Rendez-vous", "Motif RDV", "Coordonnées", "Confirmation"];
 
 export default function Appointment() {
@@ -36,7 +37,7 @@ export default function Appointment() {
         <div className="w-full h-full flex flex-col justify-between">
           <div className="flex mt-10 justify-center items-center">
             <div className="mt-4">
-              {activeStep === 0 && <p>Contenu de l'étape 1</p>}
+              {activeStep === 0 && <Calendar />}
               {activeStep === 1 && <ReasonAppointmentForm />}
               {activeStep === 2 && <ContactDetailsForm />}
               {activeStep === 3 && <ConfirmationAppointmentForm />}
