@@ -8,6 +8,7 @@ import ConfirmationAppointmentForm from "../../components/AppointmentForm/Confir
 import Image from "next/image";
 import confirm_icon from "../../assets/icons/confirm_icon.svg";
 import Calendar from "../../components/Calendar";
+import { fakeBookedDates } from "../../components/Calendar/DayColumn/HourButton/fakeBookedDates";
 const steps = ["Rendez-vous", "Motif RDV", "Coordonnées", "Confirmation"];
 
 export default function Appointment() {
@@ -19,7 +20,12 @@ export default function Appointment() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date>();
+
+  const handleSelectedDate = (date: Date) => {
+    setSelectedDate(date);
+    handleNext();
+}
 
   const handleNext = () => {
     setActiveStep((prevStep) => prevStep + 1);
@@ -30,7 +36,7 @@ export default function Appointment() {
   };
 
   const handleSubmit = () => {
-    console.log(reasonAppointment, description, firstName, lastName, email, phone );
+    console.log(reasonAppointment, description, firstName, lastName, email, phone, selectedDate );
   };
 
   return (
@@ -45,7 +51,7 @@ export default function Appointment() {
         <div className="w-full h-full flex flex-col justify-between">
           <div className="flex mt-10 justify-center items-center">
             <div className="mt-4">
-              {activeStep === 0 && <Calendar />}
+              {activeStep === 0 && <Calendar bookedDates={fakeBookedDates} onSelectDate={handleSelectedDate} />}
               {activeStep === 1 && (
                 <ReasonAppointmentForm
                   reasonAppointment={reasonAppointment}
@@ -85,7 +91,7 @@ export default function Appointment() {
                   )}
                 </div>
                 <div>
-                  {activeStep !== steps.length - 1 && (
+                  {activeStep !== 0 && activeStep !== steps.length - 1 && (
                     <Button onClick={handleNext}>Suivant</Button>
                   )}
                   {activeStep === steps.length - 1 && (
