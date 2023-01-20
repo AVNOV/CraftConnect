@@ -20,9 +20,9 @@ export default function Appointment() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [selectedDate, setSelectedDate] = useState<Date>();
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
-  const handleSelectedDate = (date: Date) => {
+  const handleSelectedDate = (date: string) => {
     setSelectedDate(date);
     handleNext();
 }
@@ -82,6 +82,7 @@ export default function Appointment() {
                   lastName={lastName}
                   email={email}
                   phone={phone}
+                  selectedDate={selectedDate}
                 />
               )}
               <div className="flex flex-row mt-4 justify-between ">

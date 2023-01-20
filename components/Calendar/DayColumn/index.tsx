@@ -7,13 +7,13 @@ type props = {
   size: string | undefined;
   isExtended: boolean;
   bookedDates: string[]
-  onClick: (date: Date) => void;
+  onClick: (date: string) => void;
 };
 
 export default function DayColumn({ date, size, isExtended, bookedDates, onClick }: props) {
   const [hours, setHours] = useState<string[]>([]);
 
-  const handleClick = (date: Date) => {
+  const handleClick = (date: string) => {
     onClick(date);
 }
 

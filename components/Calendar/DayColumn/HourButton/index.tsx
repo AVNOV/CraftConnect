@@ -6,7 +6,7 @@ type props = {
   selectedDate: Date;
   hour: string;
   bookedDates: string[];
-  onClick: (date: Date) => void;
+  onClick: (date: string) => void;
 };
 
 export default function HourButton({ hour, selectedDate, bookedDates, onClick }: props) {
@@ -36,7 +36,7 @@ export default function HourButton({ hour, selectedDate, bookedDates, onClick }:
     //     }).toLocaleString(),
     //   },
     // });
-    onClick(selectedDate);
+    onClick(moment(new Date(selectedDate)).format(`DD MM yyyy ${hour}`));
   };
 
   return (
