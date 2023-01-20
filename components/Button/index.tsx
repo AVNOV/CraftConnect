@@ -4,7 +4,7 @@ type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   className?: string;
-  href?: string;
+  href?: string | { pathname: string; query: any };
   type?: "submit" | "button";
 };
 

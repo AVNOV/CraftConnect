@@ -28,11 +28,14 @@ export default function HourButton({ hour, selectedDate, bookedDates }: props) {
     router.push({
       pathname: "/booking/reason",
       query: {
-        date: moment(new Date(selectedDate)).set({
-          hour: Number(hour.slice(0, 2)),
-          minute: Number(hour.slice(2, 4)),
-          millisecond: 0
-        }).toLocaleString(),
+        ...router.query,
+        date: moment(new Date(selectedDate))
+          .set({
+            hour: Number(hour.slice(0, 2)),
+            minute: Number(hour.slice(2, 4)),
+            millisecond: 0,
+          })
+          .toLocaleString(),
       },
     });
   };

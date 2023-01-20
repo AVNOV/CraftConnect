@@ -1,37 +1,27 @@
+import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 
 type LargeInputProps = {
   name: string;
-  label: string;
   required?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: React.FormEvent<HTMLTextAreaElement>) => void;
   value: string;
   placeholder?: string;
+  className: string;
 };
 
-export default function LargeInput({
-  name,
-  label,
-  value,
-  onChange,
-  placeholder,
-}: LargeInputProps) {
-  const { formState: errors } = useForm();
-  const inputPlaceholder = placeholder ? placeholder : label.toLowerCase();
-
-  return (
-    <div className="mb-4">
-      <label className="block text-black text-base font-bold mb-1">
-        {label}
-      </label>
+const LargeInput = forwardRef(
+  ({ name, value, onChange, placeholder, className }: LargeInputProps, ref) => {
+    return (
       <textarea
-        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 hover:border-gray-500 leading-tight focus:outline-none focus:shadow-outline h-52`}
+        className={`border-0.5 border-grey rounded-md w-full py-2 px-3 text-black leading-tight h-52 ${className}`}
         id={name}
-        placeholder={inputPlaceholder}
+        placeholder={placeholder}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
       />
-      {/* {errors && <p className="text-red-500">Ce champ est obligatoire</p>} */}
-    </div>
-  );
-}
+    );
+  }
+);
+
+export default LargeInput;

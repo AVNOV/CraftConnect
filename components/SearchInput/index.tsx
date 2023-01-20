@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import ArtisanInput from "./ArtisanInput";
 import LocationInput from "./LocationInput";
 import SearchButton from "./SearchButton";
@@ -9,6 +10,8 @@ type props = {
 };
 
 export default function SearchInput({ size }: props) {
+  const router = useRouter()
+
   const { handleSubmit, setValue, control } = useForm({
     defaultValues: {
       artisan: "",
@@ -17,7 +20,7 @@ export default function SearchInput({ size }: props) {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    router.push('search')
   };
 
   return (
