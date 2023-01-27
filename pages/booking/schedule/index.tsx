@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import Calendar from "../../../../components/Calendar";
-import { ArtisanType } from "../../../../types/ArtisanType";
+import Calendar from "../../../components/Calendar";
+import { ArtisanType } from "../../../types/ArtisanType";
 
-import { fakeArtisans } from "../../fakeArtisans";
+import { fakeArtisans } from "../fakeArtisans";
 
 export default function Schedule() {
   const [artisan, setArtisan] = useState<ArtisanType>();
