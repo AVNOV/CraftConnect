@@ -32,7 +32,7 @@ export default function HourButton({ hour, selectedDate, bookedDates }: props) {
         date: moment(new Date(selectedDate))
           .set({
             hour: Number(hour.slice(0, 2)),
-            minute: Number(hour.slice(2, 4)),
+            minute: Number(hour.slice(3, 5)),
             millisecond: 0,
           })
           .toLocaleString(),
