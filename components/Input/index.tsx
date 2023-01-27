@@ -11,15 +11,10 @@ type InputProps = {
 };
 
 const Input = forwardRef(
-  ({
-    name,
-    label,
-    type,
-    value,
-    onChange,
-    titleColor,
-    required,
-  }: InputProps) => {
+  (
+    { name, label, type, value, onChange, titleColor, required }: InputProps,
+    ref
+  ) => {
     return (
       <div className="mb-4">
         <label
