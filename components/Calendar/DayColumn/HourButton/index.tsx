@@ -6,10 +6,9 @@ type props = {
   selectedDate: Date;
   hour: string;
   bookedDates: string[];
-  onClick: (date: string) => void;
 };
 
-export default function HourButton({ hour, selectedDate, bookedDates, onClick }: props) {
+export default function HourButton({ hour, selectedDate, bookedDates }: props) {
   const [isAlreadyBooked, setIsAlreadyBooked] = useState<boolean>(false);
   const router = useRouter();
 
