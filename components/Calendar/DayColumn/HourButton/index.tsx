@@ -6,9 +6,10 @@ type props = {
   selectedDate: Date;
   hour: string;
   bookedDates: string[];
+  onClick: (date: string) => void;
 };
 
-export default function HourButton({ hour, selectedDate, bookedDates }: props) {
+export default function HourButton({ hour, selectedDate, bookedDates, onClick }: props) {
   const [isAlreadyBooked, setIsAlreadyBooked] = useState<boolean>(false);
   const router = useRouter();
 
@@ -25,16 +26,17 @@ export default function HourButton({ hour, selectedDate, bookedDates }: props) {
   }, [selectedDate]);
 
   const handleClick = () => {
-    router.push({
-      pathname: "/booking/reason",
-      query: {
-        date: moment(new Date(selectedDate)).set({
-          hour: Number(hour.slice(0, 2)),
-          minute: Number(hour.slice(2, 4)),
-          millisecond: 0
-        }).toLocaleString(),
-      },
-    });
+    // router.push({
+    //   pathname: "/booking/reason",
+    //   query: {
+    //     date: moment(new Date(selectedDate)).set({
+    //       hour: Number(hour.slice(0, 2)),
+    //       minute: Number(hour.slice(2, 4)),
+    //       millisecond: 0
+    //     }).toLocaleString(),
+    //   },
+    // });
+    onClick(moment(new Date(selectedDate)).format(`DD MM yyyy ${hour}`));
   };
 
   return (

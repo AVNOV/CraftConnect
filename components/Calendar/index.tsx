@@ -9,12 +9,17 @@ import Image from "next/image";
 type props = {
   size?: string;
   bookedDates: string[];
+  onSelectDate: (date: string) => void;
 };
 
-export default function Calendar({ size, bookedDates }: props) {
+export default function Calendar({ size, bookedDates, onSelectDate }: props) {
   const [isExtended, setIsExtended] = useState<boolean>(false);
   const [dates, setDates] = useState<Date[]>([]);
   const extendedArrow = useRef<HTMLImageElement>(null);
+
+  const handleClick = (date: string) => {
+    onSelectDate(date);
+}
 
   const nbDaysDisplayed: number = size === "small" ? 5 : 7;
 
@@ -67,6 +72,7 @@ export default function Calendar({ size, bookedDates }: props) {
       key={index}
       date={date}
       size={size}
+      onClick={handleClick}
       isExtended={isExtended}
       bookedDates={bookedDates}
     />
