@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { Autocomplete } from "../../Autocomplete";
+import Autocomplete from "../../Autocomplete";
 import Input from "../../Input";
 import LargeInput from "../../InputLarge";
 
@@ -29,7 +29,7 @@ export default function ReasonAppointmentForm({
         <div className="w-96 h-full rounded-lg p-4 shadow-2xl bg-white">
           <form>
             <div className="w-full mx-auto pt-5">
-              <Controller
+              {/* <Controller
                 name="reasonAppointment"
                 control={control}
                 render={({ field, formState: { errors } }) => (
@@ -45,9 +45,9 @@ export default function ReasonAppointmentForm({
                     titleColor="text-black"
                   />
                 )}
-              />
+              /> */}
               <div className="border-t-2 border-gray-300 mt-8 mb-7  "></div>
-              <Controller
+              {/* <Controller
                 name="description"
                 control={control}
                 render={({ field }) => (
@@ -60,7 +60,7 @@ export default function ReasonAppointmentForm({
                     onChange={(e) => setDescription(e)}
                   />
                 )}
-              />
+              /> */}
             </div>
           </form>
         </div>

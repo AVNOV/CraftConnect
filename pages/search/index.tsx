@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import SearchInput from "../../components/SearchInput";
 
-import { fakeArtisans } from "../[artisanId]/fakeArtisans";
+import { fakeArtisans } from "../booking/fakeArtisans";
 import { ArtisanType } from "../../types/ArtisanType";
 import SearchCard from "../../components/SearchCard";
 

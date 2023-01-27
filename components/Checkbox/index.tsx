@@ -1,15 +1,13 @@
 type checkBoxProps = {
-    label: string;
-}
+  label: string;
+  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+};
 
-export function Checkbox({ label }: checkBoxProps) {
+export default function Checkbox({ label, onChange }: checkBoxProps) {
   return (
-    <div className="relative flex items-center">
-      <input
-        className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-        type="checkbox"
-      />
-      <label className="ml-2 text-base font-bold">{label}</label>
+    <div className="relative flex items-center text-black">
+      <input onChange={onChange} className="h-4 w-4" type="checkbox" />
+      <label className="ml-2">{label}</label>
     </div>
   );
 }

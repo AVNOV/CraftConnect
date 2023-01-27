@@ -24,7 +24,10 @@ export default function SearchCard({ artisan }: props) {
         </div>
         <p className="ml-3 text-sm">{artisan.city}</p>
         <Button
-          href={`${artisan.id}/booking/schedule`}
+          href={{
+            pathname: "/booking/schedule",
+            query: { artisanId: artisan.id },
+          }}
           className="w-fit"
           children="Prendre rendez-vous"
           type="button"

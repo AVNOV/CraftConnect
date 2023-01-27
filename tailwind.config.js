@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderWidth: {
+        '0.5': '0.5px'
+      },
       colors: {
         white: {
           DEFAULT: "#F9F9F9",
