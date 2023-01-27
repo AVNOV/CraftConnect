@@ -12,7 +12,7 @@ export default function Contact() {
 
   const onSubmit = (data: FieldValues) => {
     router.push({
-      pathname: "",
+      pathname: "confirmation",
       query: {
         ...router.query,
         firstname: data.firstname,
