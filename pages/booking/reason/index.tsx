@@ -27,7 +27,7 @@ export default function Reason() {
   };
 
   const onPreviousClick = () => {
-    router.push("/search");
+    router.back()
   };
 
   return (
