@@ -21,7 +21,7 @@ export default function DropdownList() {
       },
       {
         text: "Mes rendez-vous",
-        href: "/rendezvous",
+        href: "/profile/appointment",
       },
       {
         text: "Logout",
