@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../store";
 
 export default function Contact() {
   const router = useRouter();
-  const user = useAppSelector((state) => state.auth.user);
+  // const user = useAppSelector((state) => state.auth.user);
   const { handleSubmit, control } = useForm();
 
   const onSubmit = (data: FieldValues) => {
