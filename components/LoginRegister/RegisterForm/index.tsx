@@ -3,15 +3,15 @@ import Input from "../../Input";
 import Button from "../../Button";
 import Tabs from "../../Tabs";
 import { useState } from "react";
-import Autocomplete from "../../Autocomplete";
+import { AutocompleteRegister } from "../../Autocomplete/AutocompleteRegister";
 
-type RegisterFormProps = {
+type InformationFormProps = {
   title?: string;
   buttonText: string;
   onSubmit: (data: any) => void;
 };
 
-export default function RegisterForm({ title, buttonText, onSubmit }: RegisterFormProps) {
+export default function InformationForm({ title, buttonText, onSubmit }: InformationFormProps) {
   const { register, handleSubmit, formState: errors, control } = useForm();
 
   const options = [
@@ -109,10 +109,10 @@ export default function RegisterForm({ title, buttonText, onSubmit }: RegisterFo
                   name="categorySkill"
                   control={control}
                   render={({ field, formState: { errors } }) => (
-                    <Autocomplete
+                    <AutocompleteRegister
                       options={options}
-                      onChange={(option) => field.onChange(option)}
-                      name="Domaine d'activité"
+                      onChange={(option) => field.onChange(option.value)}
+                      title="Domaine d'activité"
                     />
                   )}
                 />
