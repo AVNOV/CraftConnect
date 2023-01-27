@@ -2,7 +2,31 @@ import { Controller, useForm } from "react-hook-form";
 import Input from "../../Input";
 import { Checkbox } from "../../Checkbox";
 
-export default function ContactDetailsForm() {
+type Props = {
+  accountInformation: boolean;
+  setAccountInformation: (accountInformation: boolean) => void;
+  firstName: string;
+  setFirstName: (firstName: string) => void;
+  lastName: string;
+  setLastName: (lastName: string) => void;
+  email: string;
+  setEmail: (email: string) => void;
+  phone: string;
+  setPhone: (phone: string) => void;
+};
+
+export default function ContactDetailsForm({
+  accountInformation,
+  setAccountInformation,
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  email,
+  setEmail,
+  phone,
+  setPhone,
+}: Props) {
   const { register, handleSubmit, formState: errors, control } = useForm();
 
   return (
@@ -11,18 +35,18 @@ export default function ContactDetailsForm() {
         <div className="w-96 h-full rounded-lg p-4 shadow-2xl bg-white">
           <form>
             <div className="w-full mx-auto pt-5">
-                <div className="mb-5">
-                  <Controller
-                    name="accountInformation"
-                    control={control}
-                    render={({ field }) => (
-                      <Checkbox
-                        label="Utiliser les informations du compte"
-                        {...field}
-                      />
-                    )}
-                  />
-                </div>
+              <div className="mb-5">
+                <Controller
+                  name="accountInformation"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox
+                      label="Utiliser les informations du compte"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
               <div className="flex flex-row justify-between">
                 <div className="mr-5">
                   <Controller
@@ -35,6 +59,8 @@ export default function ContactDetailsForm() {
                         type="text"
                         titleColor="text-black"
                         {...field}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e)}
                       />
                     )}
                   />
@@ -49,6 +75,8 @@ export default function ContactDetailsForm() {
                       label="Nom"
                       type="text"
                       {...field}
+                      value={lastName}
+                      onChange={(e) => setLastName(e)}
                     />
                   )}
                 />
@@ -65,37 +93,28 @@ export default function ContactDetailsForm() {
                         label="Email"
                         type="email"
                         {...field}
+                        value={email}
+                        onChange={(e) => setEmail(e)}
                       />
                     )}
                   />
                 </div>
                 <Controller
-                  name="phoneNumber"
+                  name="phone"
                   control={control}
                   render={({ field }) => (
                     <Input
                       required
                       titleColor="text-black"
                       label="Téléphone"
-                      type="text"
+                      type="tel"
                       {...field}
+                      value={phone}
+                      onChange={(e) => setPhone(e)}
                     />
                   )}
                 />
               </div>
-              <Controller
-                name="city"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    required
-                    titleColor="text-black"
-                    label="Ville"
-                    type="text"
-                    {...field}
-                  />
-                )}
-              />
             </div>
           </form>
         </div>

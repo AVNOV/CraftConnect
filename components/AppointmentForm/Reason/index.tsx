@@ -3,7 +3,19 @@ import Autocomplete from "../../Autocomplete";
 import Input from "../../Input";
 import LargeInput from "../../InputLarge";
 
-export default function ReasonAppointmentForm() {
+type props = {
+  reasonAppointment: string;
+  setReasonAppointment: (reasonAppointment: string) => void;
+  description: string;
+  setDescription: (description: string) => void;
+};
+
+export default function ReasonAppointmentForm({
+  reasonAppointment,
+  setReasonAppointment,
+  description,
+  setDescription,
+}: props) {
   const { register, handleSubmit, formState: errors, control } = useForm();
 
   const options = [
@@ -24,7 +36,10 @@ export default function ReasonAppointmentForm() {
                   <Autocomplete
                     options={options}
                     dropdownDirection="down"
-                    onChange={(option) => field.onChange(option.value)}
+                    onChange={(option) => {
+                      setReasonAppointment(option.value);
+                      field.onChange(option.value);
+                    }}
                     title="Motif du rendez-vous"
                     name="reasonAppointment"
                     titleColor="text-black"
@@ -36,7 +51,14 @@ export default function ReasonAppointmentForm() {
                 name="description"
                 control={control}
                 render={({ field }) => (
-                  <LargeInput required label="Description" placeholder="(facultatif)" {...field} />
+                  <LargeInput
+                    required
+                    label="Description"
+                    placeholder="(facultatif)"
+                    {...field}
+                    value={description}
+                    onChange={(e) => setDescription(e)}
+                  />
                 )}
               /> */}
             </div>
