@@ -1,4 +1,5 @@
 import Head from "next/head";
+import ProfileAppointmentDisplay from "../../../components/Profile/Appointment";
 
 export default function ProfileAppointment() {
   return (
@@ -10,7 +11,7 @@ export default function ProfileAppointment() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex h-full">
-        Rendez-vous de l'utilisateur
+        <ProfileAppointmentDisplay />
       </main>
     </>
   );
