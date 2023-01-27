@@ -63,7 +63,7 @@ export default function InformationForm({ title, buttonText, onSubmit }: Informa
                   )}
                 />
               </div>
-              <div className="flex items-center justify-between my-6">
+              <div className="flex items-center justify-center my-6">
                 <Button type="submit">{buttonText}</Button>
               </div>
             </form>
@@ -117,7 +117,7 @@ export default function InformationForm({ title, buttonText, onSubmit }: Informa
                   )}
                 />
               </div>
-              <div className="flex items-center justify-between my-6">
+              <div className="flex items-center justify-center my-6">
                 <Button type="submit">{buttonText}</Button>
               </div>
             </form>
