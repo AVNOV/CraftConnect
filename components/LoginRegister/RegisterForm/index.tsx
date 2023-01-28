@@ -56,7 +56,7 @@ export default function InformationForm({ title, buttonText, onSubmit }: Informa
                   )}
                 />
                 <Controller
-                  name="phoneNumber"
+                  name="phone_number"
                   control={control}
                   render={({ field }) => (
                     <Input label="Téléphone" type="phone" {...field} />
@@ -92,21 +92,21 @@ export default function InformationForm({ title, buttonText, onSubmit }: Informa
                   )}
                 />
                 <Controller
-                  name="phoneNumber"
+                  name="phone_number"
                   control={control}
                   render={({ field }) => (
                     <Input label="Téléphone" type="phone" {...field} />
                   )}
                 />
                 <Controller
-                  name="companyName"
+                  name="company_name"
                   control={control}
                   render={({ field }) => (
                     <Input label="Nom entreprise" type="input" {...field} />
                   )}
                 />
                 <Controller
-                  name="categorySkill"
+                  name="category_skill"
                   control={control}
                   render={({ field, formState: { errors } }) => (
                     <AutocompleteRegister
