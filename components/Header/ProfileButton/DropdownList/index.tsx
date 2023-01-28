@@ -1,15 +1,16 @@
 import { useRef, useMemo, useEffect } from "react";
+import { useAppSelector } from "../../../../store";
+
 import { UserType } from "../../../../types/UserType";
 
 import Image from "next/image";
+import Item from "./Item";
 
 import arrow_icon from "../../../../assets/icons/arrow_icon.svg";
 import profile_picture from "../../../../assets/images/profile_picture.png";
-import Item from "./Item";
-import { useAppSelector } from "../../../../store";
 
 export default function DropdownList() {
-  const user: any = useAppSelector((store) => store.auth.user);
+  const user: UserType = useAppSelector((store) => store.auth.user);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const arrowRef = useRef<HTMLImageElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,6 @@ export default function DropdownList() {
     ],
     []
   );
-
 
   useEffect(() => {
     const dropdown: HTMLUListElement = dropdownRef.current!;
@@ -55,8 +55,8 @@ export default function DropdownList() {
     const arrow: HTMLImageElement = arrowRef.current!;
     if (dropdown.style.opacity === "1") {
       dropdown.style.opacity = "0";
-        dropdown.style.pointerEvents = "none";
-        arrow.style.transform = "rotateX(0deg)";
+      dropdown.style.pointerEvents = "none";
+      arrow.style.transform = "rotateX(0deg)";
     } else {
       dropdown.style.opacity = "1";
       dropdown.style.pointerEvents = "auto";
