@@ -8,7 +8,7 @@ import SearchCard from "../../components/SearchCard";
 
 export default function Search() {
   const [artisans] = useState<ArtisanType[]>(fakeArtisans);
-  const nbResults = 5;
+  const nbResults = artisans.length;
 
   const displaySearchCards = artisans.map((artisan, index) => (
     <SearchCard key={index} artisan={artisan} />
