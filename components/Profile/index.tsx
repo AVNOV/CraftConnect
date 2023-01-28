@@ -1,133 +1,134 @@
-import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import Input from "../Input";
+import { useAppSelector } from "../../store";
+import { UserType } from "../../types/UserType";
+import { FormEvent, useEffect, useState } from "react";
 import Button from "../Button";
 
-interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  city: string;
-}
+export default function ProfileDisplay() {
+  const { handleSubmit, setValue, control, register } = useForm();
+  const user: UserType = useAppSelector((state) => state.auth.user);
 
-interface Props {
-  user: User;
-}
+  const [isEditing, setIsEditing] = useState<boolean>(true);
 
-export default function ProfileDisplay({ user }: Props) {
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [email, setEmail] = useState(user.email);
-  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-  const [city, setCity] = useState(user.city);
-  const [formModified, setFormModified] = useState(false);
-
-  const handleFirstNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFirstName(event.target.value);
-    setFormModified(true);
+  const initilizeUserValue = () => {
+    setValue("firstname", user.firstname);
+    setValue("lastname", user.lastname);
+    setValue("email", user.email);
+    setValue("phone", user.phone_number);
+    setValue("city", user.city);
   };
 
-  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(event.target.value);
-    setFormModified(true);
+  useEffect(() => {
+    initilizeUserValue()
+  }, [])
+
+  const onEditClick = (e: FormEvent) => {
+    e.preventDefault();
+    setIsEditing(false);
   };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-    setFormModified(true);
+  const onCancelClick = (e: FormEvent) => {
+    e.preventDefault();
+    initilizeUserValue()
+    setIsEditing(true);
   };
-
-  const handlePhoneNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setPhoneNumber(event.target.value);
-    setFormModified(true);
-  };
-
-  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCity(event.target.value);
-    setFormModified(true);
-  };
-
-  const handleCancel = () => {
-    setFirstName(user.firstName);
-    setLastName(user.lastName);
-    setEmail(user.email);
-    setPhoneNumber(user.phoneNumber);
-    setCity(user.city);
-    setFormModified(false);
-  };
-
-  const handleSubmit = () => {
-    setFormModified(false);
+  const onSubmit = () => {
+    setIsEditing(false);
   };
 
   return (
-    <div className="w-full mx-auto pt-5">
-      <div className="flex flex-col h-1/2 w-1/2 justify-center items-center mx-auto my-auto">
-        <div className="h-full rounded-lg p-4 w-full shadow-2xl bg-white">
-          <div className="pt-5 h-full">
-            <div className="mb-5 text-center text-xl font-medium">
-              Informations du compte
-            </div>
-            <div className="flex flex-row justify-between">
-              <div className="mr-5 mb-5">
-                <div className="text-lg font-medium">Prénom</div>
-                <input
-                  className="text-base"
-                  value={firstName}
-                  onChange={handleFirstNameChange}
-                />
-              </div>
-              <div>
-                <div className="text-lg font-medium">Nom</div>
-                <input
-                  className="text-base"
-                  value={lastName}
-                  onChange={handleLastNameChange}
-                />
-              </div>
-            </div>
-            <div className="flex flex-row justify-between">
-              <div className="mr-5 mb-5">
-                <div className="text-lg font-medium">Email</div>
-                <input
-                  className="text-base"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </div>
-              <div>
-                <div className="text-lg font-medium">Téléphone</div>
-                <input
-                  className="text-base"
-                  value={phoneNumber}
-                  onChange={handlePhoneNumberChange}
-                />
-              </div>
-            </div>
-            <div>
-              <div className="text-lg font-medium">Ville</div>
-              <input
-                className="text-base"
-                value={city}
-                onChange={handleCityChange}
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <h2 className="text-3xl mb-2 -mt-8">Profile</h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white shadow-searchcard p-5 rounded w-4/12 space-y-3"
+      >
+        <div className="flex justify-between">
+          <Controller
+            name="firstname"
+            control={control}
+            render={({ field }) => (
+              <Input
+                disabled={isEditing}
+                titleColor="text-black"
+                required
+                label="Prénom"
+                type="text"
+                {...field}
               />
-            </div>
-            {formModified && (
-              <div className="flex justify-center pt-5">
-                <div className="mr-5">
-                  <Button onClick={handleCancel}>Annuler</Button>
-                </div>
-                <div>
-                  <Button onClick={handleSubmit}>Valider</Button>
-                </div>
-              </div>
             )}
-          </div>
+          />
+          <Controller
+            name="lastname"
+            control={control}
+            render={({ field }) => (
+              <Input
+                disabled={isEditing}
+                titleColor="text-black"
+                required
+                label="Nom"
+                type="text"
+                {...field}
+              />
+            )}
+          />
         </div>
-      </div>
+        <div className="flex justify-between">
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Input
+                disabled={isEditing}
+                titleColor="text-black"
+                required
+                label="Email"
+                type="email"
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <Input
+                disabled={isEditing}
+                titleColor="text-black"
+                required
+                label="Numéro de téléphone"
+                type="tel"
+                {...field}
+              />
+            )}
+          />
+        </div>
+        <Controller
+          name="city"
+          control={control}
+          render={({ field }) => (
+            <Input
+              disabled={isEditing}
+              titleColor="text-black"
+              required
+              label="Ville"
+              type="text"
+              {...field}
+            />
+          )}
+        />
+        <div className="flex justify-end space-x-3">
+          {!isEditing ? (
+            <>
+              <Button onClick={onCancelClick} children="Annuler" />
+              <Button children="Valider" />
+            </>
+          ) : (
+            <Button onClick={onEditClick} children="Modifier" />
+          )}
+        </div>
+      </form>
     </div>
   );
 }

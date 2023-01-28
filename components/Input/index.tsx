@@ -7,12 +7,24 @@ type InputProps = {
   required?: boolean;
   onChange: (value: string) => void;
   value: string;
+  defaultValue?: string;
   titleColor?: string;
+  disabled?: boolean;
 };
 
 const Input = forwardRef(
   (
-    { name, label, type, value, onChange, titleColor, required }: InputProps,
+    {
+      name,
+      label,
+      type,
+      value,
+      defaultValue,
+      onChange,
+      titleColor,
+      required,
+      disabled,
+    }: InputProps,
     ref
   ) => {
     return (
@@ -23,12 +35,16 @@ const Input = forwardRef(
           {label} :
         </label>
         <input
-          className={`border-0.5 border-grey appearance-none rounded-lg w-full py-2 px-3 text-black leading-tight`}
+          className={`border-0.5 border-grey appearance-none rounded-lg w-full py-2 px-3  leading-tight ${
+            disabled ? "text-grey" : "text-black"
+          }`}
           required={required}
           id={name}
           type={type}
           placeholder={label.toLocaleLowerCase()}
-          value={value? value : ""}
+          value={value ? value : ""}
+          defaultValue={defaultValue}
+          disabled={disabled}
           onChange={(e) => onChange(e.target.value)}
         />
       </div>
