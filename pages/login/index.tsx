@@ -1,17 +1,25 @@
+import { useRouter } from "next/router";
+import { useAppDispatch } from "../../store";
+import { login } from "../../slices/auth.slice";
+import { loginRequest } from "../../api/query/user.query";
+
 import Head from "next/head";
 import LoginRegister from "../../components/LoginRegister";
+
 import { FieldValues } from "react-hook-form";
-import { loginRequest } from "../../api/query/user.query";
-import { useRouter } from "next/router";
 
 export default function Login() {
-  const router = useRouter()
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const onSubmit = async (data: FieldValues) => {
     try {
-      await loginRequest(data.email, data.password);
-      router.push('/')
+      const response = await loginRequest(data.email, data.password);
+      dispatch(
+        login({ user: response.user, access_token: response.access_token })
+      );
+      router.push("/");
     } catch (error: any) {
-      console.error(error.code, { message: error.message });
+      console.error(error);
     }
   };
 
