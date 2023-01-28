@@ -1,20 +1,15 @@
 import { useQuery, useMutation } from "react-query";
 import API from "../API";
-import { useAppDispatch } from "../../store";
-import { login } from "../../slices/auth.slice";
 
-
-export const  loginRequest = async (email: string, password: string) => {
+export const loginRequest = async (email: string, password: string) => {
   const { data } = await API.post("/login", { email, password });
-  console.log(email, password, data)
+
   if (data.access_token) {
-    const { user } = data;
     const { access_token } = data;
-    localStorage.setItem('access_token', access_token);
-    const dispatch = useAppDispatch();
-    dispatch(login({ user, access_token }));
+    localStorage.setItem("access_token", access_token);
   }
-  return data;
+
+  return { user: data.user, access_token: data.access_token };
 };
 
 export const useGetUsers = () => {
@@ -39,7 +34,7 @@ export const useCreateUser = () => {
 };
 
 export const useUpdateUser = () => {
-  return useMutation(async (user: {id: string}) => {
+  return useMutation(async (user: { id: string }) => {
     const { data } = await API.put(`/users/${user.id}`, user);
     return data;
   });

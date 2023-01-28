@@ -1,7 +1,8 @@
 import { useGetUsers } from "../../api/query/user.query";
 import Button from "../../components/Button";
 import Head from "next/head";
-
+import { useAppSelector } from "../../store";
+import { UserType } from "../../types/UserType";
 
 export default function Test() {
   const { data } = useGetUsers();
@@ -9,6 +10,9 @@ export default function Test() {
     console.log(data);
   };
 
+  const user: UserType = useAppSelector((state) => state.auth.user);
+
+console.log(user)
   return (
     <>
       <Head>
@@ -21,6 +25,7 @@ export default function Test() {
         <div>
           <Button onClick={handleClick} />
         </div>
+        <p>{user.email}</p>
       </main>
     </>
   );

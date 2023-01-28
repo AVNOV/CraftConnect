@@ -1,4 +1,4 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FieldValues, useForm } from "react-hook-form";
 import Input from "../Input";
 import Button from "../Button";
 import { useRouter } from "next/router";
@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 type LoginRegisterProps = {
   title: string;
   buttonText: string;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: FieldValues) => void;
 };
 
 export default function LoginRegister({
