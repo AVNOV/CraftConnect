@@ -28,7 +28,7 @@ const Input = forwardRef(
           id={name}
           type={type}
           placeholder={label.toLocaleLowerCase()}
-          value={value}
+          value={value? value : ""}
           onChange={(e) => onChange(e.target.value)}
         />
       </div>

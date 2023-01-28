@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import LoginRegister from '../../components/LoginRegister'
 import { useRouter } from 'next/router';
+import { FieldValues } from 'react-hook-form';
 
 export default function Register() {
     const router = useRouter();
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FieldValues) => {
         console.log(data)
         router.push('/register/information');
     }

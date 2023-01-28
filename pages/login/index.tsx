@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import LoginRegister from '../../components/LoginRegister'
+import { FieldValues } from 'react-hook-form'
 
 export default function Login() {
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FieldValues) => {
         console.log(data)
     }
 
