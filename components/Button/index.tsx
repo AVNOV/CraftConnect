@@ -6,6 +6,7 @@ type ButtonProps = {
   className?: string;
   href?: string | { pathname: string; query: any };
   type?: "submit" | "button";
+  color?: string;
 };
 
 export default function Button(props: ButtonProps) {
@@ -23,7 +24,11 @@ export default function Button(props: ButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className={`bg-black text-white text-center h-fit cursor-pointer active:scale-95 transition-transform shadow-2xl rounded-md px-5 py-1 ${props.className}`}
+      className={`${
+        props.color ? props.color : "bg-black"
+      } text-white text-center h-fit cursor-pointer active:scale-95 transition-transform shadow-2xl rounded-md px-5 py-1 ${
+        props.className
+      }`}
     >
       {props.children}
     </button>
