@@ -17,21 +17,23 @@ type props = {
 
 const LocationInput = forwardRef(
   ({ name, onChange, value, setValue, size }: props, ref) => {
+    const [isLoading, setIsLoading] = useState(false);
     const handlePosition = () => {
+      setIsLoading(true);
       navigator.geolocation.getCurrentPosition(
-        (position: GeolocationPosition) => {
-          Geocode.fromLatLng(
-            position.coords.latitude.toString(),
-            position.coords.longitude.toString()
-          ).then(
-            (response) => {
-              const address = response.results[0].formatted_address;
-              setValue("location", address);
-            },
-            (error: Error) => {
-              console.error(error);
-            }
-          );
+        async (position: GeolocationPosition) => {
+          try {
+            const response = await Geocode.fromLatLng(
+              position.coords.latitude.toString(),
+              position.coords.longitude.toString()
+            );
+            const address = response.results[0].formatted_address;
+            setValue("location", address);
+            setIsLoading(false);
+          } catch (error) {
+            console.error(error);
+            setIsLoading(false);
+          }
         }
       );
     };
@@ -53,14 +55,28 @@ const LocationInput = forwardRef(
             size === "small" ? "text-base" : "text-lg"
           }`}
         />
-        <Image
-          onClick={handlePosition}
-          src={position_icon}
-          alt="current position button"
-          className={`cursor-pointer active:scale-95 transition-transform ${
-            size == "small" ? "w-4 h-4" : "w-6 h-6"
-          }`}
-        />
+        {isLoading ? (
+          <div
+            className={`flex justify-center items-center ${
+              size == "small" ? "w-4 h-4" : "w-6 h-6"
+            }`}
+          >
+            <div
+              className={`border-t-transparent border-solid animate-spin rounded-full border-red  ${
+                size == "small" ? "border w-2 h-2" : "border-2 w-4 h-4"
+              }`}
+            />
+          </div>
+        ) : (
+          <Image
+            onClick={handlePosition}
+            src={position_icon}
+            alt="current position button"
+            className={`cursor-pointer active:scale-95 transition-transform ${
+              size == "small" ? "w-4 h-4" : "w-6 h-6"
+            }`}
+          />
+        )}
       </div>
     );
   }
