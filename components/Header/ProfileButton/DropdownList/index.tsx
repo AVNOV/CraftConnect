@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { UserType } from "../../../../types/UserType";
 
 import Image from "next/image";
@@ -12,6 +12,7 @@ export default function DropdownList() {
   const user: any = useAppSelector((store) => store.auth.user);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const arrowRef = useRef<HTMLImageElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   const listItems = useMemo(
     () => [
@@ -31,14 +32,31 @@ export default function DropdownList() {
     []
   );
 
-  const openDropdown = () => {
+
+  useEffect(() => {
+    const dropdown: HTMLUListElement = dropdownRef.current!;
+    const button: HTMLDivElement = buttonRef.current!;
+    const arrow: HTMLImageElement = arrowRef.current!;
+    const closeDropdown = (event: any) => {
+      if (dropdown && !button.contains(event.target)) {
+        dropdown.style.opacity = "0";
+        dropdown.style.pointerEvents = "none";
+        arrow.style.transform = "rotateX(0deg)";
+      }
+    };
+    document.addEventListener("click", closeDropdown, true);
+    return () => {
+      document.removeEventListener("click", closeDropdown, true);
+    };
+  });
+
+  const handleDropdown = () => {
     const dropdown: HTMLUListElement = dropdownRef.current!;
     const arrow: HTMLImageElement = arrowRef.current!;
-
     if (dropdown.style.opacity === "1") {
       dropdown.style.opacity = "0";
-      dropdown.style.pointerEvents = "none";
-      arrow.style.transform = "rotateX(0deg)";
+        dropdown.style.pointerEvents = "none";
+        arrow.style.transform = "rotateX(0deg)";
     } else {
       dropdown.style.opacity = "1";
       dropdown.style.pointerEvents = "auto";
@@ -52,7 +70,11 @@ export default function DropdownList() {
 
   return (
     <div className="relative flex justify-center">
-      <div onClick={openDropdown} className="flex space-x-2 cursor-pointer">
+      <div
+        ref={buttonRef}
+        onClick={handleDropdown}
+        className="flex space-x-2 cursor-pointer"
+      >
         <Image
           className="rounded-full w-6 h-6"
           src={profile_picture}
