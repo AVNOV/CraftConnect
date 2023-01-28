@@ -7,8 +7,8 @@ import { useAppSelector } from "../../../store";
 
 export default function Contact() {
   const router = useRouter();
-  // const user = useAppSelector((state) => state.auth.user);
-  const { handleSubmit, control } = useForm();
+  const user = useAppSelector((state) => state.auth.user);
+  const { handleSubmit, setValue, control } = useForm();
 
   const onSubmit = (data: FieldValues) => {
     router.push({
@@ -24,7 +24,21 @@ export default function Contact() {
     });
   };
 
-  const handleCheck = (event: React.FormEvent<HTMLInputElement>) => {};
+  const handleCheck = (event: React.FormEvent<HTMLInputElement>) => {
+    if (event.currentTarget.checked) {
+      setValue("firstname", user.firstname);
+      setValue("lastname", user.lastname);
+      setValue("email", user.email);
+      setValue("phone", user.phone_number);
+      setValue("city", user.city);
+    } else {
+      setValue("firstname", "");
+      setValue("lastname", "");
+      setValue("email", "");
+      setValue("phone", "");
+      setValue("city", "");
+    }
+  };
 
   const onPreviousClick = () => {
     router.back();
