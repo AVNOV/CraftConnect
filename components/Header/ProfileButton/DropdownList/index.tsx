@@ -18,7 +18,7 @@ export default function DropdownList() {
   const listItems = useMemo(
     () => [
       {
-        text: "Profile",
+        text: "Profil",
         href: "/profile",
       },
       {
