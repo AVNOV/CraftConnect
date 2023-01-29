@@ -1,13 +1,13 @@
-
+import { useAppSelector } from "../../../store";
+import { UserType } from "../../../types/UserType";
 
 export default function ProfileAppointmentDisplay() {
-
+    const user: UserType = useAppSelector((state) => state.auth.user);
   return (
-    <div className="w-full mx-auto pt-5">
-      <div className="flex flex-col h-1/2 w-1/2 justify-center items-center mx-auto my-auto">
-        <div className="h-full rounded-lg p-4 w-full shadow-2xl bg-white">
-          <div className="flex flex-col justify-center items-center"></div>
-        </div>
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <h2 className="text-3xl mb-2 -mt-8">Mes rendez-vous</h2>
+      <div className="bg-white shadow-searchcard p-5 rounded w-4/12 space-y-3">
+        <div className="flex justify-between"></div>
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ export default function ProfileDisplay() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      <h2 className="text-3xl mb-2 -mt-8">Profile</h2>
+      <h2 className="text-3xl mb-2 -mt-8">Mon profil</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white shadow-searchcard p-5 rounded w-4/12 space-y-3"
