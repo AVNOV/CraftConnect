@@ -1,12 +1,20 @@
-import { Controller, useForm } from "react-hook-form";
-import Input from "../Input";
-import { useAppSelector } from "../../store";
-import { UserType } from "../../types/UserType";
 import { FormEvent, useEffect, useState } from "react";
+import { Controller, FieldValues, useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+
+import { useAppDispatch, useAppSelector } from "../../store";
+import { UserType } from "../../types/UserType";
+import { UpdateUserType } from "../../types/UpdateUserType";
+import { deleteUser, updateUser } from "../../api/query/user.query";
+import { logout } from "../../slices/auth.slice";
+
+import Input from "../Input";
 import Button from "../Button";
 
 export default function ProfileDisplay() {
-  const { handleSubmit, setValue, control, register } = useForm();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { handleSubmit, setValue, control } = useForm();
   const user: UserType = useAppSelector((state) => state.auth.user);
 
   const [isEditing, setIsEditing] = useState<boolean>(true);
@@ -15,13 +23,25 @@ export default function ProfileDisplay() {
     setValue("firstname", user.firstname);
     setValue("lastname", user.lastname);
     setValue("email", user.email);
-    setValue("phone", user.phone_number);
+    setValue("phone_number", user.phone_number);
     setValue("city", user.city);
   };
 
   useEffect(() => {
-    initilizeUserValue()
-  }, [])
+    initilizeUserValue();
+  }, [user]);
+
+  const onDeleteClick = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await deleteUser(user.id);
+      dispatch(logout());
+      console.log(response);
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const onEditClick = (e: FormEvent) => {
     e.preventDefault();
@@ -30,10 +50,17 @@ export default function ProfileDisplay() {
 
   const onCancelClick = (e: FormEvent) => {
     e.preventDefault();
-    initilizeUserValue()
+    initilizeUserValue();
     setIsEditing(true);
   };
-  const onSubmit = () => {
+
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const response = await updateUser(user.id, data as UpdateUserType);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
     setIsEditing(false);
   };
 
@@ -90,7 +117,7 @@ export default function ProfileDisplay() {
             )}
           />
           <Controller
-            name="phone"
+            name="phone_number"
             control={control}
             render={({ field }) => (
               <Input
@@ -118,14 +145,25 @@ export default function ProfileDisplay() {
             />
           )}
         />
-        <div className="flex justify-end space-x-3">
+        <div className="flex justify-end space-x-3 pt-5">
           {!isEditing ? (
             <>
-              <Button onClick={onCancelClick} children="Annuler" />
+              <Button
+                color="bg-red-700"
+                onClick={onCancelClick}
+                children="Annuler"
+              />
               <Button children="Valider" />
             </>
           ) : (
-            <Button onClick={onEditClick} children="Modifier" />
+            <>
+              <Button
+                color="bg-red-700"
+                onClick={onDeleteClick}
+                children="Supprimer"
+              />
+              <Button onClick={onEditClick} children="Modifier" />
+            </>
           )}
         </div>
       </form>

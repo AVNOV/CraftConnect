@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "react-query";
 import API from "../API";
 import { CreateUserType } from "../../types/CreateUserType";
+import { UpdateUserType } from "../../types/UpdateUserType";
 
 export const loginRequest = async (email: string, password: string) => {
   const { data } = await API.post("/login", { email, password });
@@ -17,6 +18,16 @@ export const createUser = async (user: CreateUserType) => {
   return data;
 };
 
+export const deleteUser = async (id: number) => {
+  const { data } = await API.delete(`/users/${id}`);
+  return data;
+};
+
+export const updateUser = async (id: number, user: UpdateUserType) => {
+  const { data } = await API.patch(`/users/${id}`, user);
+  return data;
+};
+
 export const useGetUsers = () => {
   return useQuery("users", async () => {
     const { data } = await API.get("/users");
@@ -28,18 +39,5 @@ export const useGetUser = (id: string) => {
   return useQuery(["user", id], async () => {
     const { data } = await API.get(`/users/${id}`);
     return data;
-  });
-};
-
-export const useUpdateUser = () => {
-  return useMutation(async (user: { id: string }) => {
-    const { data } = await API.put(`/users/${user.id}`, user);
-    return data;
-  });
-};
-
-export const useDeleteUser = () => {
-  return useMutation(async (id) => {
-    await API.delete(`/users/${id}`);
   });
 };
