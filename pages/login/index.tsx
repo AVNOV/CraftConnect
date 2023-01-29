@@ -7,19 +7,24 @@ import Head from "next/head";
 import LoginRegister from "../../components/LoginRegister";
 
 import { FieldValues } from "react-hook-form";
+import { useState } from "react";
 
 export default function Login() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [error, setError] = useState("");
+
   const onSubmit = async (data: FieldValues) => {
     try {
       const response = await loginRequest(data.email, data.password);
       dispatch(
         login({ user: response.user, access_token: response.access_token })
       );
+      setError("");
       router.push("/");
     } catch (error: any) {
       console.error(error);
+      setError("Erreur, vérifiez votre email et/ou votre mot de passe.");
     }
   };
 
@@ -36,6 +41,7 @@ export default function Login() {
           onSubmit={onSubmit}
           title="Connexion"
           buttonText="Se connecter"
+          error={error}
         />
       </main>
     </>

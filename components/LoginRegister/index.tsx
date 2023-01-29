@@ -7,12 +7,14 @@ type LoginRegisterProps = {
   title: string;
   buttonText: string;
   onSubmit: (data: FieldValues) => void;
+  error?: string;
 };
 
 export default function LoginRegister({
   title,
   buttonText,
   onSubmit,
+  error,
 }: LoginRegisterProps) {
   const router = useRouter();
   const linkText =
@@ -51,6 +53,7 @@ export default function LoginRegister({
               )}
             />
           </div>
+          {error && <p className="text-red-700 text-xs text-center">{error}</p>}
           <div className="flex flex-col items-center justify-between my-6">
             <Button type="submit">{buttonText}</Button>
             <p className="flex flex-row text-white mt-5 text-sm">
