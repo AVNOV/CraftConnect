@@ -30,7 +30,7 @@ export default function InformationForm({ title, buttonText, onSubmit }: Informa
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
         />
-        <div className="w-1/3 h-full rounded-lg p-4 shadow-lg bg-white-50%">
+        <div className="w-11/12 md:w-6/12 lg:w-5/12 xl:w-1/3 h-full rounded-lg p-4 shadow-lg bg-white-50%">
           {selectedTab === "Particulier" ? (
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="w-2/3 mx-auto pt-5">
