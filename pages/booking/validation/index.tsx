@@ -7,7 +7,7 @@ export default function Validation() {
 
   return (
     <div className="flex items-center justify-center h-full w-full">
-      <div className="flex flex-col items-center rounded bg-white shadow-searchcard w-4/12 p-5">
+      <div className="flex flex-col items-center rounded bg-white shadow-searchcard p-5 w-11/12 md:w-8/12 lg:w-6/12 xl:w-4/12">
         <p className="text-center mb-5">
           Le rendez-vous pour votre{" "}
           <span className="text-red">{router.query.reason}</span> est bien
