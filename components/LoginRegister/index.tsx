@@ -30,7 +30,7 @@ export default function LoginRegister({
         <h2 className="text-3xl font-bold text-white mb-2">{title}</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-1/4 h-full rounded-lg p-4 shadow-lg bg-white-50%"
+          className="w-11/12 md:w-6/12 lg:w-5/12 xl:w-1/4 h-full rounded-lg p-4 shadow-lg bg-white-50%"
         >
           <div className="w-2/3 mx-auto pt-5">
             <Controller
