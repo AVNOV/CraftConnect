@@ -34,7 +34,7 @@ export default function Reason() {
     <div className="flex items-center justify-center h-full w-full">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col rounded bg-white shadow-searchcard w-4/12 p-5"
+        className="flex flex-col rounded bg-white shadow-searchcard p-5 w-11/12 md:w-6/12 lg:w-4/12"
       >
         <label className="mb-2">Motif du rendez-vous</label>
         <Controller
