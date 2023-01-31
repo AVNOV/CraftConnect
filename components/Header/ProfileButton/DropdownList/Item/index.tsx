@@ -23,7 +23,7 @@ export default function Item({ text, href }: props) {
   return (
     <li
       onClick={handleClick}
-      className="flex items-center w-36 h-11 pl-3 hover:bg-grey transition-colors cursor-pointer"
+      className="flex items-center h-11 pl-3 hover:bg-grey transition-colors cursor-pointer justify-center w-full md:justify-start md:w-36"
     >
       {text}
     </li>

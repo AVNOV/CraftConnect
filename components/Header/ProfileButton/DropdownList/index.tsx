@@ -26,7 +26,7 @@ export default function DropdownList() {
         href: "/profile/appointment",
       },
       {
-        text: "Logout",
+        text: "Se déconnecter",
         href: "/logout",
       },
     ],
@@ -69,7 +69,7 @@ export default function DropdownList() {
   ));
 
   return (
-    <div className="relative flex justify-center">
+    <div className="md:relative flex justify-center">
       <div
         ref={buttonRef}
         onClick={handleDropdown}
@@ -90,7 +90,7 @@ export default function DropdownList() {
       </div>
       <ul
         ref={dropdownRef}
-        className="absolute z-10 bg-white mt-2 overflow-hidden text-sm opacity-0 pointer-events-none top-full text-black shadow-dropdownlist rounded transition-opacity duration-500"
+        className="absolute z-10 bg-white mt-2 overflow-hidden text-sm opacity-0 pointer-events-none top-full text-black shadow-dropdownlist rounded transition-opacity duration-500 left-0 right-0 mx-auto w-11/12 md:left-auto md:w-auto md:right-auto"
       >
         {displayListItems}
       </ul>
