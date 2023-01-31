@@ -7,6 +7,7 @@ import { ArtisanType } from "../../../types/ArtisanType";
 import { fakeArtisans } from "../fakeArtisans";
 
 export default function Schedule() {
+  const [size, setSize] = useState<string>("large");
   const [artisan, setArtisan] = useState<ArtisanType>();
   const router = useRouter();
   const { artisanId } = router.query;
@@ -19,10 +20,20 @@ export default function Schedule() {
     setArtisan(currentArtisan);
   }, [artisanId]);
 
+  useEffect(() => {
+    function handleResize() {
+      setSize(window.innerWidth < 768 ? "small" : "large");
+    }
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="h-full w-full flex flex-col items-center py-5">
+    <div className="h-full w-full flex flex-col items-center justify-center py-5">
       <div className="rounded bg-white shadow-searchcard p-4">
-        {artisan && <Calendar bookedDates={artisan!.appointment} />}
+        {artisan && <Calendar size={size} bookedDates={artisan!.appointment} />}
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export default function Search() {
   return (
     <div className="flex flex-col items-center w-full min-h-full bg-grey-light">
       <SearchInput size="small" />
-      <div className="my-14 mx-2">
+      <div className="my-14">
         <p className="text-xs">{nbResults} résultats trouvés</p>
         <ul className=" space-y-10">{displaySearchCards}</ul>
       </div>

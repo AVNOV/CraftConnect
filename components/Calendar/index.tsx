@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import moment from "moment";
 
 import arrow_icon from "../../assets/icons/arrow_icon.svg";
 
 import DayColumn from "./DayColumn";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 type props = {
   size?: string;
@@ -12,11 +13,22 @@ type props = {
 };
 
 export default function Calendar({ size, bookedDates }: props) {
+  const router = useRouter();
   const [isExtended, setIsExtended] = useState<boolean>(false);
   const [dates, setDates] = useState<Date[]>([]);
   const extendedArrow = useRef<HTMLImageElement>(null);
+  const nbDaysDisplayed = useMemo<number>(() => {
+    let newSize: number;
+    if (size === "small") {
+      newSize = 4;
+    } else if (size === "medium") {
+      newSize = 5;
+    } else {
+      newSize = 7;
+    }
 
-  const nbDaysDisplayed: number = size === "small" ? 5 : 7;
+    return newSize;
+  }, [size]);
 
   useEffect((): void => {
     const newDates: Date[] = [];
@@ -28,7 +40,7 @@ export default function Calendar({ size, bookedDates }: props) {
       );
     }
     setDates(newDates);
-  }, []);
+  }, [nbDaysDisplayed]);
 
   const handlePrevioustDays = (): void => {
     if (
@@ -66,7 +78,6 @@ export default function Calendar({ size, bookedDates }: props) {
     <DayColumn
       key={index}
       date={date}
-      size={size}
       isExtended={isExtended}
       bookedDates={bookedDates}
     />
@@ -89,7 +100,7 @@ export default function Calendar({ size, bookedDates }: props) {
           className="self-start mt-3 -rotate-90 cursor-pointer active:scale-95 transition-transform"
         />
       </div>
-      {size === "small" && (
+      {router.pathname === "/search" && (
         <Image
           ref={extendedArrow}
           onClick={handleExtended}

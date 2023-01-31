@@ -1,24 +1,21 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
 import HourButton from "./HourButton";
+import { useRouter } from "next/router";
 
 type props = {
   date: Date;
-  size: string | undefined;
   isExtended: boolean;
   bookedDates: string[];
 };
 
-export default function DayColumn({
-  date,
-  size,
-  isExtended,
-  bookedDates,
-}: props) {
+export default function DayColumn({ date, isExtended, bookedDates }: props) {
+  const router = useRouter();
   const [hours, setHours] = useState<string[]>([]);
 
   useEffect(() => {
-    const nbHoursDisplayed = size === "small" && !isExtended ? 5 : 10;
+    const nbHoursDisplayed =
+      router.pathname === "/search" && !isExtended ? 5 : 10;
     const newHours: string[] = [];
     for (let index = 9; index < 9 + nbHoursDisplayed; index++) {
       let formatedHour = index.toString();
