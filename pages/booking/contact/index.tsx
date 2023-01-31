@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <div className="flex items-center justify-center h-full w-full">
       <form
-        className="bg-white shadow-searchcard p-5 rounded w-4/12 space-y-3"
+        className="bg-white shadow-searchcard p-5 rounded space-y-3 w-11/12 md:w-7/12 xl:w-4/12"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Checkbox
