@@ -18,7 +18,7 @@ const ArtisanInput = forwardRef(
         <Image
           src={search_icon}
           alt=""
-          className={`invert-25 ${size == "small" ? "md:w-4 md:h-4" : "w-3 h-3 md:w-6 md:h-6"}`}
+          className={`invert-25 w-3 h-3 ${size == "small" ? "md:w-4 md:h-4" : "md:w-6 md:h-6"}`}
         />
         <input
           name={name}
@@ -27,8 +27,8 @@ const ArtisanInput = forwardRef(
           required={true}
           placeholder="Nom, spécialité..."
           type="text"
-          className={`bg-transparent pl-1 md:pl-4 ${
-            size === "small" ? "text-base" : "text-xs md:text-lg"
+          className={`w-full bg-transparent pl-1 text-xs md:pl-4 ${
+            size === "small" ? "md:text-base" : "md:text-lg"
           }`}
         />
       </div>

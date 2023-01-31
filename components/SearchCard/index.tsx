@@ -11,8 +11,8 @@ type props = {
 
 export default function SearchCard({ artisan }: props) {
   return (
-    <li className="flex bg-white rounded shadow-searchcard p-5">
-      <div className="flex flex-col justify-between h-60">
+    <li className="flex flex-col bg-white rounded shadow-searchcard p-5 md:flex-row">
+      <div className="flex flex-col justify-between h-60 mb-10 md:mb-0">
         <div className="flex mr-40">
           <Image src={profile_picture} alt="" className="w-16 h-16" />
           <div className="ml-3">

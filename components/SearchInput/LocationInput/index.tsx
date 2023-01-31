@@ -43,7 +43,7 @@ const LocationInput = forwardRef(
         <Image
           src={marker_icon}
           alt=""
-          className={`${size == "small" ? "w-4 h-4" : "w-3 h-3 md:w-6 md:h-6"}`}
+          className={`w-3 h-3 ${size == "small" ? "md:w-4 md:h-4" : "md:w-6 md:h-6"}`}
         />
         <input
           name={name}
@@ -51,14 +51,14 @@ const LocationInput = forwardRef(
           value={value}
           placeholder="Où ?"
           type="text"
-          className={`bg-transparent pl-1 md:pl-4 w-full ${
-            size === "small" ? "text-base" : "text-xs md:text-lg"
+          className={`w-full bg-transparent pl-1 text-xs md:pl-4 ${
+            size === "small" ? "md:text-base" : "md:text-lg"
           }`}
         />
         {isLoading ? (
           <div
-            className={`flex justify-center items-center ${
-              size == "small" ? "w-4 h-4" : "w-3 h-3 md:w-6 md:h-6"
+            className={`flex justify-center items-center w-3 h-3 ${
+              size == "small" ? "md:w-4 md:h-4" : "md:w-6 md:h-6"
             }`}
           >
             <div
