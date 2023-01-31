@@ -69,9 +69,9 @@ export default function ProfileDisplay() {
       <h2 className="text-3xl mb-2 -mt-8">Mon profil</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-searchcard p-5 rounded w-4/12 space-y-3"
+        className="bg-white shadow-searchcard p-5 rounded space-y-3 w-11/12 md:w-6/12 lg:w-5/12 xl:w-4/12"
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm space-x-1 md:text-base">
           <Controller
             name="firstname"
             control={control}
@@ -101,7 +101,7 @@ export default function ProfileDisplay() {
             )}
           />
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between text-sm space-x-1 md:text-base">
           <Controller
             name="email"
             control={control}
