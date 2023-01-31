@@ -26,7 +26,7 @@ export default function SearchInput({ size }: props) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex rounded overflow-hidden w-fit mt-5 shadow-searchcard"
+      className="flex rounded overflow-hidden w-11/12 mt-5 shadow-searchcard"
     >
       <Controller
         name="artisan"

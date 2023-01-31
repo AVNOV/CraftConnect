@@ -8,11 +8,11 @@ type props = {
 
 export default function SearchButton({ size }: props) {
   return (
-    <button className={`flex bg-black ${size === "small"? "w-10":"w-14"}`}>
+    <button className={`flex bg-black ${size === "small"? "w-10":"w-8 md:w-14"}`}>
       <Image
         src={search_icon}
         alt="search icon button"
-        className={`group search m-auto ${size === "small"? "w-5":"w-7"}`}
+        className={`group search m-auto ${size === "small"? "w-5":"w-4 md:w-7"}`}
       />
     </button>
   );

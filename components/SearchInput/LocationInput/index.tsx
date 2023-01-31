@@ -39,11 +39,11 @@ const LocationInput = forwardRef(
     };
 
     return (
-      <div className="flex items-center justify-center bg-white px-2 py-3 border-r">
+      <div className="flex items-center md:justify-center w-5/12 bg-white px-1  py-3 border-r md:px-2 md:w-auto">
         <Image
           src={marker_icon}
           alt=""
-          className={`${size == "small" ? "w-4 h-4" : "w-6 h-6"}`}
+          className={`${size == "small" ? "w-4 h-4" : "w-3 h-3 md:w-6 md:h-6"}`}
         />
         <input
           name={name}
@@ -51,14 +51,14 @@ const LocationInput = forwardRef(
           value={value}
           placeholder="Où ?"
           type="text"
-          className={`bg-transparent pl-4 ${
-            size === "small" ? "text-base" : "text-lg"
+          className={`bg-transparent pl-1 md:pl-4 w-full ${
+            size === "small" ? "text-base" : "text-xs md:text-lg"
           }`}
         />
         {isLoading ? (
           <div
             className={`flex justify-center items-center ${
-              size == "small" ? "w-4 h-4" : "w-6 h-6"
+              size == "small" ? "w-4 h-4" : "w-3 h-3 md:w-6 md:h-6"
             }`}
           >
             <div
@@ -73,7 +73,7 @@ const LocationInput = forwardRef(
             src={position_icon}
             alt="current position button"
             className={`cursor-pointer active:scale-95 transition-transform ${
-              size == "small" ? "w-4 h-4" : "w-6 h-6"
+              size == "small" ? "w-4 h-4" : "w-3 h-3 md:w-6 md:h-6"
             }`}
           />
         )}

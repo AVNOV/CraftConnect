@@ -14,11 +14,11 @@ type props = {
 const ArtisanInput = forwardRef(
   ({ name, onChange, value, size }: props, ref) => {
     return (
-      <div className="flex items-center justify-center bg-white px-2 py-3 border-r">
+      <div className="flex items-center md:justify-center w-1/2 bg-white px-1 py-3 border-r md:px-2 md:w-auto">
         <Image
           src={search_icon}
           alt=""
-          className={`invert-25 ${size == "small" ? "w-4 h-4" : "w-6 h-6"}`}
+          className={`invert-25 ${size == "small" ? "md:w-4 md:h-4" : "w-3 h-3 md:w-6 md:h-6"}`}
         />
         <input
           name={name}
@@ -27,8 +27,8 @@ const ArtisanInput = forwardRef(
           required={true}
           placeholder="Nom, spécialité..."
           type="text"
-          className={`bg-transparent pl-4 ${
-            size === "small" ? "text-base" : "text-lg"
+          className={`bg-transparent pl-1 md:pl-4 ${
+            size === "small" ? "text-base" : "text-xs md:text-lg"
           }`}
         />
       </div>
