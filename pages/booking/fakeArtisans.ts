@@ -1,6 +1,6 @@
-import { ArtisanType } from "../../types/ArtisanType";
+import { ArtisanTypeR } from "../../types/ArtisanType";
 
-export const fakeArtisans: ArtisanType[] = [
+export const fakeArtisans: ArtisanTypeR[] = [
   {
     id: 1,
     firstname: "Fabien",

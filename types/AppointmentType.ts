@@ -12,3 +12,8 @@ export type AppointmentType = {
     description: string;
     reason: string;
 }
+
+export type ReasonAppointmentType = {
+    id: number;
+    name: string;
+};

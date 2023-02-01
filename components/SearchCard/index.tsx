@@ -1,4 +1,4 @@
-import { ArtisanType } from "../../types/ArtisanType";
+import { ArtisanTypeR } from "../../types/ArtisanType";
 import Calendar from "../Calendar";
 
 import profile_picture from "../../assets/images/profile_picture.png";
@@ -7,7 +7,7 @@ import Button from "../Button";
 import { useEffect, useState } from "react";
 
 type props = {
-  artisan: ArtisanType;
+  artisan: ArtisanTypeR;
 };
 
 export default function SearchCard({ artisan }: props) {
