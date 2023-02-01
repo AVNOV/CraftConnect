@@ -58,10 +58,10 @@ export default function ProfileDisplay() {
     try {
       const response = await updateUser(user.id, data as UpdateUserType);
       console.log(response);
+      setIsEditing(true);
     } catch (error) {
       console.error(error);
     }
-    setIsEditing(false);
   };
 
   return (

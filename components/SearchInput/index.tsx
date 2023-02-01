@@ -20,7 +20,9 @@ export default function SearchInput({ size }: props) {
   });
 
   const onSubmit = (data: any) => {
-    router.push('search')
+    console.log(data)
+    router.push({ pathname: "/search",
+    query: data})
   };
 
   return (

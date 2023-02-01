@@ -7,3 +7,8 @@ export const useGetArtisans = () => {
     return data;
   });
 };
+
+export const getArtisans = async () => {
+  const { data } = await API.get("/artisans");
+  return data;
+};
