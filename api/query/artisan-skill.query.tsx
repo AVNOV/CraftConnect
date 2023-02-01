@@ -8,3 +8,8 @@ export const useGetArtisanSkill = () => {
   });
 };
 
+export const getArtisansSkill = async () => {
+  const { data } = await API.get("/artisan_skill");
+  return data;
+};
+

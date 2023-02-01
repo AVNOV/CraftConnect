@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import arrow_icon from "../../../assets/icons/arrow_icon.svg";
+import { ArtisanSkillType } from '../../../types/ArtisanType';
 
 interface Option {
   value: string;
@@ -9,8 +10,8 @@ interface Option {
 }
 
 interface Props {
-  options: Option[];
-  onChange: (option: Option) => void;
+  options: ArtisanSkillType[];
+  onChange: (option: ArtisanSkillType) => void;
   title: string;
   titleColor?: string;
   dropdownDirection?: 'up' | 'down';
@@ -20,13 +21,13 @@ interface Props {
 export const AutocompleteRegister: React.FC<Props> = ({ options, onChange, title, titleColor, dropdownDirection = 'down', name }) => {
   const [open, setOpen] = useState(false);
   const { register, setValue } = useForm();
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [selectedOption, setSelectedOption] = useState<ArtisanSkillType | null>(null);
 
   const toggleOpen = () => {
     setOpen(!open);
   };
 
-  const handleChange = (option: Option) => {
+  const handleChange = (option: ArtisanSkillType) => {
     setSelectedOption(option);
     onChange(option);
     setOpen(false);
@@ -41,7 +42,7 @@ export const AutocompleteRegister: React.FC<Props> = ({ options, onChange, title
         onClick={toggleOpen}
         className={`flex flex-row justify-between text-left appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${selectedOption === null ? "text-grey" : "text-gray-600"}`}
       >
-        {selectedOption ? selectedOption.label : `Sélectionner`}
+        {selectedOption ? selectedOption.name : `Sélectionner`}
         <Image
           className="w-3 transition-transform duration-700"
           src={arrow_icon}
@@ -53,11 +54,11 @@ export const AutocompleteRegister: React.FC<Props> = ({ options, onChange, title
         <ul className={`absolute z-50 bg-white rounded-md shadow-lg ${dropdownDirection === 'up' ? 'top-0' : 'bottom-0'} mt-1 w-full py-1 list-none`}>
           {options.map((option) => (
             <li
-              key={option.value}
+              key={option.id}
               className="px-4 py-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
               onClick={() => handleChange(option)}
             >
-              {option.label}
+              {option.name}
             </li>
           ))}
         </ul>

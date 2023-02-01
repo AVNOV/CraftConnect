@@ -7,6 +7,7 @@ import { fakeArtisans } from "../booking/fakeArtisans";
 import { ArtisanSearchType, ArtisanTypeR } from "../../types/ArtisanType";
 import SearchCard from "../../components/SearchCard";
 import { getArtisans } from "../../api/query/artisan.query";
+import { getArtisansSkill } from "../../api/query/artisan-skill.query";
 
 export default function Search() {
   const router = useRouter();
@@ -14,6 +15,24 @@ export default function Search() {
   console.log("search", data.artisan)
   const [artisans, setArtisans] = useState<ArtisanSearchType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [artisansSkill, setArtisansSkill] = useState([]);
+  const [isLoadingSkill, setIsLoadingSkill] = useState(false);
+
+  const fetchArtisansSkill = async () => {
+    setIsLoadingSkill(true);
+    try {
+      const response = await getArtisansSkill();
+      setArtisansSkill(response);
+      setIsLoadingSkill(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoadingSkill(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchArtisansSkill();
+  }, []);
   
   const fetchArtisans = async () => {
     setIsLoading(true);
@@ -31,7 +50,7 @@ export default function Search() {
     fetchArtisans();
   }, []);
 
-  // console.log("artisansQuery", artisansQuery);
+  console.log("artisansQuery", artisansSkill);
   // const [artisans] = useState<ArtisanTypeR[]>(fakeArtisans);
   const nbResults = artisans.length;
 

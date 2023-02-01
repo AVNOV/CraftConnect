@@ -2,8 +2,10 @@ import { Controller, useForm } from "react-hook-form";
 import Input from "../../Input";
 import Button from "../../Button";
 import Tabs from "../../Tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AutocompleteRegister } from "../../Autocomplete/AutocompleteRegister";
+import { getArtisansSkill } from "../../../api/query/artisan-skill.query";
+import { ArtisanSkillType } from "../../../types/ArtisanType";
 
 type InformationFormProps = {
   title?: string;
@@ -13,6 +15,25 @@ type InformationFormProps = {
 
 export default function InformationForm({ title, buttonText, onSubmit }: InformationFormProps) {
   const { register, handleSubmit, formState: errors, control } = useForm();
+
+  const [artisansSkill, setArtisansSkill] = useState<ArtisanSkillType[]>([]);
+  const [isLoadingSkill, setIsLoadingSkill] = useState(false);
+
+  const fetchArtisansSkill = async () => {
+    setIsLoadingSkill(true);
+    try {
+      const response = await getArtisansSkill();
+      setArtisansSkill(response);
+      setIsLoadingSkill(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoadingSkill(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchArtisansSkill();
+  }, []);
 
   const options = [
     { value: "option1", label: "Option 1" },
@@ -110,8 +131,8 @@ export default function InformationForm({ title, buttonText, onSubmit }: Informa
                   control={control}
                   render={({ field, formState: { errors } }) => (
                     <AutocompleteRegister
-                      options={options}
-                      onChange={(option) => field.onChange(option.value)}
+                      options={artisansSkill}
+                      onChange={(option) => field.onChange(option.id)}
                       title="Domaine d'activité"
                     />
                   )}
