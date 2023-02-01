@@ -14,14 +14,14 @@ export type ArtisanType = {
   id: number;
   company_name: string;
   artisanSchedule: ArtisanScheduleType;
-  artisanSkill: string[];
+  artisanSkill: ArtisanSkillType;
 }
 
 export type ArtisanSearchType = {
   id: number;
   company_name: string;
   artisanSchedule: ArtisanScheduleType;
-  artisanSkill: string[];
+  artisanSkill: ArtisanSkillType;
   user: UserType;
 };
 

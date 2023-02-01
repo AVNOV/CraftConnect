@@ -4,7 +4,7 @@ import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
 
 import { fakeArtisans } from "../booking/fakeArtisans";
-import { ArtisanTypeR } from "../../types/ArtisanType";
+import { ArtisanSearchType, ArtisanTypeR } from "../../types/ArtisanType";
 import SearchCard from "../../components/SearchCard";
 import { getArtisans } from "../../api/query/artisan.query";
 
@@ -12,7 +12,7 @@ export default function Search() {
   const router = useRouter();
   const data = router.query;
   console.log("search", data.artisan)
-  const [artisansQuery, setArtisans] = useState([]);
+  const [artisans, setArtisans] = useState<ArtisanSearchType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   
   const fetchArtisans = async () => {
@@ -31,8 +31,8 @@ export default function Search() {
     fetchArtisans();
   }, []);
 
-  console.log("artisansQuery", artisansQuery);
-  const [artisans] = useState<ArtisanTypeR[]>(fakeArtisans);
+  // console.log("artisansQuery", artisansQuery);
+  // const [artisans] = useState<ArtisanTypeR[]>(fakeArtisans);
   const nbResults = artisans.length;
 
   const displaySearchCards = artisans.map((artisan, index) => (

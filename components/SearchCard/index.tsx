@@ -1,4 +1,4 @@
-import { ArtisanTypeR } from "../../types/ArtisanType";
+import { ArtisanSearchType, ArtisanTypeR } from "../../types/ArtisanType";
 import Calendar from "../Calendar";
 
 import profile_picture from "../../assets/images/profile_picture.png";
@@ -7,7 +7,7 @@ import Button from "../Button";
 import { useEffect, useState } from "react";
 
 type props = {
-  artisan: ArtisanTypeR;
+  artisan: ArtisanSearchType;
 };
 
 export default function SearchCard({ artisan }: props) {
@@ -30,12 +30,12 @@ export default function SearchCard({ artisan }: props) {
           <Image src={profile_picture} alt="" className="w-16 h-16" />
           <div className="ml-3">
             <p>
-              {artisan.firstname} {artisan.lastname}
+              {artisan.user.firstname} {artisan.user.lastname}
             </p>
-            <p className="text-grey text-sm">{artisan.skill} </p>
+            <p className="text-grey text-sm">{artisan.artisanSkill.name} </p>
           </div>
         </div>
-        <p className="ml-3 text-sm">{artisan.city}</p>
+        <p className="ml-3 text-sm">{artisan.user.city}</p>
         <Button
           href={{
             pathname: "/booking/schedule",
@@ -47,7 +47,7 @@ export default function SearchCard({ artisan }: props) {
         />
       </div>
 
-      <Calendar size={size} bookedDates={artisan.appointment} />
+      <Calendar size={size} bookedDates={[""]} />
     </li>
   );
 }
