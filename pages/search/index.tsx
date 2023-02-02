@@ -34,7 +34,7 @@ export default function Search() {
   }, []);
 
   // console.log("artisansQuery", artisansSkill);
-  // console.log("artisans", artisans)
+  console.log("artisans", artisans)
   // const [artisans] = useState<ArtisanTypeR[]>(fakeArtisans);
   const nbResults = artisans.length;
 

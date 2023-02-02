@@ -13,3 +13,7 @@ export const getArtisansSkill = async () => {
   return data;
 };
 
+export const getArtisanSkillById = async (id: number) => {
+  const { data } = await API.get(`/artisan_skill/${id}`);
+  return data;
+};

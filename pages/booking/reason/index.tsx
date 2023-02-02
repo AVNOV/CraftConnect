@@ -4,16 +4,37 @@ import Autocomplete from "../../../components/Autocomplete";
 import LargeInput from "../../../components/InputLarge";
 import Button from "../../../components/Button";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { getArtisanSkillById } from "../../../api/query/artisan-skill.query";
+import { ArtisanSkillType } from "../../../types/ArtisanType";
 
 export default function Reason() {
   const router = useRouter();
   const { handleSubmit, control } = useForm();
+  const { artisanSkillId } = router.query;
 
-  const options = [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    { value: "option3", label: "Option 3" },
-  ];
+  const [artisanSkill, setArtisanSkill] = useState<ArtisanSkillType>();
+  const [isLoading, setIsLoading] = useState(false);
+ 
+
+  const fetchArtisanSkill = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getArtisanSkillById(Number(artisanSkillId));
+      setArtisanSkill(response);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchArtisanSkill();
+  }, []);
+
+  console.log("reason", artisanSkillId)
+
 
   const onSubmit = (data: FieldValues) => {
     router.push({
@@ -43,7 +64,7 @@ export default function Reason() {
           render={({ field }) => (
             <Autocomplete
               placeholder="Selectionner un motif"
-              options={options}
+              options={artisanSkill?.reasons}
               required
               className="mx-auto w-10/12"
               {...field}

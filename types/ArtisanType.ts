@@ -34,5 +34,5 @@ export type ArtisanScheduleType = {
 export type ArtisanSkillType = {
   id: number;
   name: string;
-  reasons: ReasonAppointmentType;
+  reasons: ReasonAppointmentType[];
 };

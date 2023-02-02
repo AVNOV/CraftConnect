@@ -39,7 +39,7 @@ export default function SearchCard({ artisan }: props) {
         <Button
           href={{
             pathname: "/booking/schedule",
-            query: { artisanId: artisan.id },
+            query: { artisanId: artisan.id, artisanSkillId: artisan.artisanSkill.id },
           }}
           className="w-fit"
           children="Prendre rendez-vous"

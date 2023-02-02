@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { ReasonAppointmentType } from "../../types/AppointmentType";
 
 interface Option {
   value: string;
@@ -6,7 +7,7 @@ interface Option {
 }
 
 type props = {
-  options: Option[];
+  options: ReasonAppointmentType[] | undefined;
   className?: string;
   placeholder?: string;
   name: string;
@@ -19,11 +20,13 @@ const Autocomplete = forwardRef(
     { options, className, placeholder, name, required, onChange }: props,
     ref
   ) => {
-    const displayOptions = options.map((option, index) => (
-      <option key={index} value={option.value}>
-        {option.label}
+
+    const displayOptions = options !== undefined ? options.map((option, index) => (
+      <option key={index} value={option.name}>
+        {option.name}
       </option>
-    ));
+    )): [];
+
     return (
       <select
         onChange={onChange}

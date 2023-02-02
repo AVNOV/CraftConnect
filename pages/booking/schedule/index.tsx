@@ -2,26 +2,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import Calendar from "../../../components/Calendar";
-import { ArtisanSearchType, ArtisanType } from "../../../types/ArtisanType";
+import { ArtisanSearchType } from "../../../types/ArtisanType";
 
-import { fakeArtisans } from "../fakeArtisans";
 import { getArtisan } from "../../../api/query/artisan.query";
 
 export default function Schedule() {
   const [size, setSize] = useState<string>("large");
-  const [artisan, setArtisan] = useState<ArtisanType>();
   const router = useRouter();
   const { artisanId } = router.query;
 
-  const [artisans, setArtisans] = useState<ArtisanSearchType>();
+  const [artisan, setArtisan] = useState<ArtisanSearchType>();
   const [isLoading, setIsLoading] = useState(false);
  
 
-  const fetchArtisans = async () => {
+  const fetchArtisan = async () => {
     setIsLoading(true);
     try {
       const response = await getArtisan(Number(artisanId));
-      setArtisans(response);
+      setArtisan(response);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -30,7 +28,7 @@ export default function Schedule() {
   };
   
   useEffect(() => {
-    fetchArtisans();
+    fetchArtisan();
   }, []);
 
   useEffect(() => {
@@ -46,7 +44,7 @@ export default function Schedule() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center py-5">
       <div className="rounded bg-white shadow-searchcard p-4">
-        {artisans && <Calendar size={size} bookedDates={[""]} />}
+        {artisan && <Calendar size={size} bookedDates={[""]} />}
       </div>
     </div>
   );
