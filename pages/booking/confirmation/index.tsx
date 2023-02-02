@@ -1,12 +1,32 @@
 import { useRouter } from "next/router";
 import Button from "../../../components/Button";
 import moment from "moment";
+import { CreateAppointmentType } from "../../../types/AppointmentType";
+import { createAppointment } from "../../../api/query/appointment.query";
+import { UserType } from "../../../types/UserType";
+import { useAppSelector } from "../../../store";
 
 export default function Confirmation() {
   const router = useRouter();
+  const userId: number = useAppSelector((store) => store.auth.user.id);
 
   const handleClick = () => {
-    router.push({ pathname: "validation", query: router.query });
+    const appointment: CreateAppointmentType = {
+      client: userId,
+      artisan: Number(router.query.artisanId),
+      address: String(router.query.city),
+      day: moment(router.query.date).format("YYYY-MM-DD"),
+      hour: Number(moment(router.query.date).format("HH")),
+      status: "waiting",
+      description: String(router.query.description),
+      reason: String(router.query.reason),
+    };
+
+    createAppointment(appointment).then(() => {
+      router.push({ pathname: "validation", query: router.query });
+    });
+    // console.log("appointment", appointment);
+    // router.push({ pathname: "validation", query: router.query });
   };
 
   return (
@@ -34,7 +54,11 @@ export default function Confirmation() {
             {router.query.city}
           </p>
         </div>
-        <Button onClick={handleClick} children="Confirmer" className="self-end mt-5" />
+        <Button
+          onClick={handleClick}
+          children="Confirmer"
+          className="self-end mt-5"
+        />
       </div>
     </div>
   );

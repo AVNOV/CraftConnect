@@ -7,7 +7,6 @@ import { fakeArtisans } from "../booking/fakeArtisans";
 import { ArtisanSearchType, ArtisanTypeR } from "../../types/ArtisanType";
 import SearchCard from "../../components/SearchCard";
 import { getArtisans } from "../../api/query/artisan.query";
-import { getArtisansSkill } from "../../api/query/artisan-skill.query";
 
 export default function Search() {
   const router = useRouter();
@@ -33,9 +32,7 @@ export default function Search() {
     fetchArtisans();
   }, []);
 
-  // console.log("artisansQuery", artisansSkill);
   console.log("artisans", artisans)
-  // const [artisans] = useState<ArtisanTypeR[]>(fakeArtisans);
   const nbResults = artisans.length;
 
   const displaySearchCards = artisans.map((artisan, index) => (
