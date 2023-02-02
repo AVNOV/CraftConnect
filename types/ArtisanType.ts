@@ -36,3 +36,11 @@ export type ArtisanSkillType = {
   name: string;
   reasons: ReasonAppointmentType[];
 };
+
+export type ArtisanSearchBySkillType = {
+  id: number;
+  name: string;
+  artisans: ArtisanSearchType[];
+  reasons: ReasonAppointmentType[];
+}
+

@@ -5,13 +5,13 @@ import LargeInput from "../../../components/InputLarge";
 import Button from "../../../components/Button";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getArtisanSkillById } from "../../../api/query/artisan-skill.query";
+import { getArtisanSkillByName } from "../../../api/query/artisan-skill.query";
 import { ArtisanSkillType } from "../../../types/ArtisanType";
 
 export default function Reason() {
   const router = useRouter();
   const { handleSubmit, control } = useForm();
-  const { artisanSkillId } = router.query;
+  const { artisanSkillName } = router.query;
 
   const [artisanSkill, setArtisanSkill] = useState<ArtisanSkillType>();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function Reason() {
   const fetchArtisanSkill = async () => {
     setIsLoading(true);
     try {
-      const response = await getArtisanSkillById(Number(artisanSkillId));
+      const response = await getArtisanSkillByName(String(artisanSkillName));
       setArtisanSkill(response);
       setIsLoading(false);
     } catch (error) {
@@ -33,7 +33,7 @@ export default function Reason() {
     fetchArtisanSkill();
   }, []);
 
-  console.log("reason", artisanSkillId)
+  console.log("reason", artisanSkillName)
 
 
   const onSubmit = (data: FieldValues) => {

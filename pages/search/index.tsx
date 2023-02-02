@@ -3,23 +3,22 @@ import { useEffect, useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
 
-import { fakeArtisans } from "../booking/fakeArtisans";
-import { ArtisanSearchType, ArtisanTypeR } from "../../types/ArtisanType";
+import { ArtisanSearchBySkillType } from "../../types/ArtisanType";
 import SearchCard from "../../components/SearchCard";
-import { getArtisans } from "../../api/query/artisan.query";
+import { getArtisanSkillAndArtisanByName } from "../../api/query/artisan-skill.query";
 
 export default function Search() {
   const router = useRouter();
   const data = router.query;
   console.log("search", data.artisan)
-  const [artisans, setArtisans] = useState<ArtisanSearchType[]>([]);
+  const [artisans, setArtisans] = useState<ArtisanSearchBySkillType>();
   const [isLoading, setIsLoading] = useState(false);
  
 
   const fetchArtisans = async () => {
     setIsLoading(true);
     try {
-      const response = await getArtisans();
+      const response = await getArtisanSkillAndArtisanByName(String(data.artisan));
       setArtisans(response);
       setIsLoading(false);
     } catch (error) {
@@ -33,9 +32,9 @@ export default function Search() {
   }, []);
 
   console.log("artisans", artisans)
-  const nbResults = artisans.length;
+  const nbResults = artisans?.artisans.length;
 
-  const displaySearchCards = artisans.map((artisan, index) => (
+  const displaySearchCards = artisans?.artisans.map((artisan, index) => (
     <SearchCard key={index} artisan={artisan} />
   ));
 

@@ -3,7 +3,6 @@ import Button from "../../../components/Button";
 import moment from "moment";
 import { CreateAppointmentType } from "../../../types/AppointmentType";
 import { createAppointment } from "../../../api/query/appointment.query";
-import { UserType } from "../../../types/UserType";
 import { useAppSelector } from "../../../store";
 
 export default function Confirmation() {
