@@ -12,3 +12,8 @@ export const getArtisans = async () => {
   const { data } = await API.get("/artisans");
   return data;
 };
+
+export const getArtisan = async (id: number) => {
+  const { data } = await API.get(`/artisans/${id}`);
+  return data;
+};

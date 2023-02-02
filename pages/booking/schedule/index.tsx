@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import Calendar from "../../../components/Calendar";
-import { ArtisanType } from "../../../types/ArtisanType";
+import { ArtisanSearchType, ArtisanType } from "../../../types/ArtisanType";
 
 import { fakeArtisans } from "../fakeArtisans";
+import { getArtisan } from "../../../api/query/artisan.query";
 
 export default function Schedule() {
   const [size, setSize] = useState<string>("large");
@@ -12,13 +13,25 @@ export default function Schedule() {
   const router = useRouter();
   const { artisanId } = router.query;
 
-  useEffect(() => {
-    let currentArtisan: ArtisanType = fakeArtisans.find(
-      (artisan) => artisan.id === Number(artisanId)
-    )!;
+  const [artisans, setArtisans] = useState<ArtisanSearchType>();
+  const [isLoading, setIsLoading] = useState(false);
+ 
 
-    setArtisan(currentArtisan);
-  }, [artisanId]);
+  const fetchArtisans = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getArtisan(Number(artisanId));
+      setArtisans(response);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchArtisans();
+  }, []);
 
   useEffect(() => {
     function handleResize() {
@@ -33,7 +46,7 @@ export default function Schedule() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center py-5">
       <div className="rounded bg-white shadow-searchcard p-4">
-        {artisan && <Calendar size={size} bookedDates={artisan!.appointment} />}
+        {artisans && <Calendar size={size} bookedDates={[""]} />}
       </div>
     </div>
   );

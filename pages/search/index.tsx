@@ -15,25 +15,8 @@ export default function Search() {
   console.log("search", data.artisan)
   const [artisans, setArtisans] = useState<ArtisanSearchType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [artisansSkill, setArtisansSkill] = useState([]);
-  const [isLoadingSkill, setIsLoadingSkill] = useState(false);
+ 
 
-  const fetchArtisansSkill = async () => {
-    setIsLoadingSkill(true);
-    try {
-      const response = await getArtisansSkill();
-      setArtisansSkill(response);
-      setIsLoadingSkill(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoadingSkill(false);
-    }
-  };
-  
-  useEffect(() => {
-    fetchArtisansSkill();
-  }, []);
-  
   const fetchArtisans = async () => {
     setIsLoading(true);
     try {
@@ -50,7 +33,8 @@ export default function Search() {
     fetchArtisans();
   }, []);
 
-  console.log("artisansQuery", artisansSkill);
+  // console.log("artisansQuery", artisansSkill);
+  // console.log("artisans", artisans)
   // const [artisans] = useState<ArtisanTypeR[]>(fakeArtisans);
   const nbResults = artisans.length;
 
