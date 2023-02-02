@@ -57,28 +57,3 @@ export default function ProfileAppointmentDisplay() {
   );
 }
 
-{
-  /* <div className="bg-white shadow-searchcard p-5 rounded space-y-3 w-11/12 md:w-6/12 lg:w-5/12 xl:w-4/12">
-          { appointments === undefined ? <p>Chargement...</p> :
-        <div className="flex justify-between text-sm space-x-1 md:text-base">
-
-        <h3 className="mb-1">Horaires</h3>
-          <p className="text-grey text-xs">
-            {moment(appointments[0].day).format("DD MMMM YYYY")} à {moment(appointments[0].hour).format("HH")}
-          </p>
-          <div className="border-grey border-y-0.5 py-3 my-3">
-          <h3 className="mb-1">Motif</h3>
-          <p className="text-grey text-xs">
-            {appointments ? appointments[0].reason : ""} <br />
-            {appointments ? appointments[0].description : ""}
-          </p>
-        </div>
-        <div>
-          <h3 className="mb-1">Coordonnées de l'artisan</h3>
-          <p className="text-grey text-xs">
-          </p>
-        </div>
-        </div>
-          }
-        </div> */
-}
