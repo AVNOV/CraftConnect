@@ -68,8 +68,8 @@ export default function ProfileDisplay({ user }: Props) {
       <div className="flex flex-col h-1/2 w-1/2 justify-center items-center mx-auto my-auto">
         <div className="h-full rounded-lg p-4 w-full shadow-2xl bg-white">
           <div className="pt-5 h-full">
-            <div className="mb-5 text-center text-xl font-medium">
-              Informations du compte
+            <div className="mb-5 mt-2 font-medium text-lg text-black">
+              <u>Informations du compte</u>
             </div>
             <div className="flex flex-row justify-between">
               <div className="mr-5 mb-5">
