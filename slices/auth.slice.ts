@@ -20,8 +20,16 @@ export const authSlice = createSlice({
   },
   reducers: {
     update: (state, action) => {
-      state.user = action.payload.user;
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      const newUser = {
+        ...action.payload.user,
+        id: state.user.id,
+        created_at: state.user.created_at,
+        updated_at: state.user.updated_at,
+        role: state.user.role,
+        artisan: state.user.artisan,
+      };
+      state.user = newUser
+      localStorage.setItem("user", JSON.stringify(newUser));
     },
     login: (state, action) => {
       state.user = action.payload.user;
