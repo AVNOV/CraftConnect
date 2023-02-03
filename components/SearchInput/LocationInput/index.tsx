@@ -27,7 +27,7 @@ const LocationInput = forwardRef(
               position.coords.latitude.toString(),
               position.coords.longitude.toString()
             );
-            const address = response.results[0].formatted_address;
+            const address = response.results[0].address_components[2].long_name;
             setValue("location", address);
             setIsLoading(false);
           } catch (error) {
