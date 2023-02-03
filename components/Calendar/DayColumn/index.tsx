@@ -2,14 +2,16 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import HourButton from "./HourButton";
 import { useRouter } from "next/router";
+import { ArtisanType } from "../../../types/ArtisanType";
 
 type props = {
   date: Date;
+  artisan?: ArtisanType
   isExtended: boolean;
   bookedDates: string[];
 };
 
-export default function DayColumn({ date, isExtended, bookedDates }: props) {
+export default function DayColumn({ date, isExtended, artisan, bookedDates }: props) {
   const router = useRouter();
   const [hours, setHours] = useState<string[]>([]);
 
@@ -33,6 +35,7 @@ export default function DayColumn({ date, isExtended, bookedDates }: props) {
     <HourButton
       key={index}
       hour={hour}
+      artisan={artisan}
       selectedDate={date}
       bookedDates={bookedDates}
     />
