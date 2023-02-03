@@ -1,6 +1,9 @@
 import { FormEvent, useEffect, useState } from "react";
 import { AppointmentType } from "../../../types/AppointmentType";
-import { deleteAppointment, getAppointments } from "../../../api/query/appointment.query";
+import {
+  deleteAppointment,
+  getAppointments,
+} from "../../../api/query/appointment.query";
 import moment from "moment";
 import Button from "../../Button";
 
@@ -29,6 +32,8 @@ export default function ProfileAppointmentDisplay() {
     try {
       const response = await deleteAppointment(id);
       console.log(response);
+      const newAppointments = await fetchAppointments();
+      console.log("appointments", newAppointments);
     } catch (error) {
       console.error(error);
     }

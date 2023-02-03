@@ -11,7 +11,7 @@ import { ArtisanSkillType } from "../../../types/ArtisanType";
 export default function Reason() {
   const router = useRouter();
   const { handleSubmit, control } = useForm();
-  const { artisanSkillName } = router.query;
+  const { artisan } = router.query;
 
   const [artisanSkill, setArtisanSkill] = useState<ArtisanSkillType>();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,8 @@ export default function Reason() {
   const fetchArtisanSkill = async () => {
     setIsLoading(true);
     try {
-      const response = await getArtisanSkillByName(String(artisanSkillName));
+      const response = await getArtisanSkillByName(String(artisan));
+      console.log(response)
       setArtisanSkill(response);
       setIsLoading(false);
     } catch (error) {
@@ -33,7 +34,7 @@ export default function Reason() {
     fetchArtisanSkill();
   }, []);
 
-  console.log("reason", artisanSkillName)
+  console.log("reason", artisan)
 
 
   const onSubmit = (data: FieldValues) => {
