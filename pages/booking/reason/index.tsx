@@ -21,6 +21,7 @@ export default function Reason() {
     setIsLoading(true);
     try {
       const response = await getArtisanSkillByName(String(artisanSkillName));
+      console.log(response)
       setArtisanSkill(response);
       setIsLoading(false);
     } catch (error) {

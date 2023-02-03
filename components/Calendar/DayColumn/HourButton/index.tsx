@@ -1,14 +1,21 @@
 import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { ArtisanType } from "../../../../types/ArtisanType";
 
 type props = {
   selectedDate: Date;
   hour: string;
+  artisan?: ArtisanType;
   bookedDates: string[];
 };
 
-export default function HourButton({ hour, selectedDate, bookedDates }: props) {
+export default function HourButton({
+  hour,
+  artisan,
+  selectedDate,
+  bookedDates,
+}: props) {
   const [isAlreadyBooked, setIsAlreadyBooked] = useState<boolean>(false);
   const router = useRouter();
 
@@ -25,19 +32,36 @@ export default function HourButton({ hour, selectedDate, bookedDates }: props) {
   }, [selectedDate]);
 
   const handleClick = () => {
-    router.push({
-      pathname: "/booking/reason",
-      query: {
-        ...router.query,
-        date: moment(new Date(selectedDate))
-          .set({
-            hour: Number(hour.slice(0, 2)),
-            minute: Number(hour.slice(3, 5)),
-            millisecond: 0,
-          })
-          .toLocaleString(),
-      },
-    });
+    if (artisan) {
+      router.push({
+        pathname: "/booking/reason",
+        query: {
+          artisanId: artisan?.id,
+          artisanSkillName: artisan?.artisanSkill.name,
+          date: moment(new Date(selectedDate))
+            .set({
+              hour: Number(hour.slice(0, 2)),
+              minute: Number(hour.slice(3, 5)),
+              millisecond: 0,
+            })
+            .toLocaleString(),
+        },
+      });
+    } else {
+      router.push({
+        pathname: "/booking/reason",
+        query: {
+          ...router.query,
+          date: moment(new Date(selectedDate))
+            .set({
+              hour: Number(hour.slice(0, 2)),
+              minute: Number(hour.slice(3, 5)),
+              millisecond: 0,
+            })
+            .toLocaleString(),
+        },
+      });
+    }
   };
 
   return (

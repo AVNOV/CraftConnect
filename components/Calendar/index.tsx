@@ -6,13 +6,15 @@ import arrow_icon from "../../assets/icons/arrow_icon.svg";
 import DayColumn from "./DayColumn";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { ArtisanType } from "../../types/ArtisanType";
 
 type props = {
   size?: string;
+  artisan?: ArtisanType
   bookedDates: string[];
 };
 
-export default function Calendar({ size, bookedDates }: props) {
+export default function Calendar({ size, artisan, bookedDates }: props) {
   const router = useRouter();
   const [isExtended, setIsExtended] = useState<boolean>(false);
   const [dates, setDates] = useState<Date[]>([]);
@@ -78,6 +80,7 @@ export default function Calendar({ size, bookedDates }: props) {
     <DayColumn
       key={index}
       date={date}
+      artisan={artisan}
       isExtended={isExtended}
       bookedDates={bookedDates}
     />

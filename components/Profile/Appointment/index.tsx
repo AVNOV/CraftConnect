@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { AppointmentType } from "../../../types/AppointmentType";
-import { getAppointments } from "../../../api/query/appointment.query";
+import {
+  deleteAppointment,
+  getAppointments,
+} from "../../../api/query/appointment.query";
 import moment from "moment";
+import Button from "../../Button";
 
 export default function ProfileAppointmentDisplay() {
   const [appointments, setAppointments] = useState<AppointmentType[]>([]);
@@ -23,6 +27,17 @@ export default function ProfileAppointmentDisplay() {
     fetchAppointments();
   }, []);
   console.log("appointments", appointments);
+
+  const onDeleteClick = async (id: number) => {
+    try {
+      const response = await deleteAppointment(id);
+      console.log(response);
+      const newAppointments = await fetchAppointments();
+      console.log("appointments", newAppointments);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const displayAppointments = appointments.map((appointment, index) => (
     <div className="bg-white shadow-searchcard p-5 ml-5 rounded space-y-3 w-11/12 md:w-6/12 lg:w-5/12 xl:w-10/12">
@@ -46,6 +61,13 @@ export default function ProfileAppointmentDisplay() {
           {appointment.artisan.company_name} <br />
         </p>
       </div>
+      <div className="flex justify-center border-grey border-t-0.5 py-8 my-8 pb-0 mb-0">
+        <Button
+          color="bg-red-700"
+          onClick={() => onDeleteClick(appointment.id)}
+          children="Annuler le rendez-vous"
+        />
+      </div>
     </div>
   ));
 
@@ -56,4 +78,3 @@ export default function ProfileAppointmentDisplay() {
     </div>
   );
 }
-

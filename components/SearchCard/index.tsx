@@ -47,7 +47,7 @@ export default function SearchCard({ artisan }: props) {
         />
       </div>
 
-      <Calendar size={size} bookedDates={[""]} />
+      <Calendar artisan={artisan} size={size} bookedDates={[""]} />
     </li>
   );
 }

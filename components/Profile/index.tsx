@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { UserType } from "../../types/UserType";
 import { UpdateUserType } from "../../types/UpdateUserType";
 import { deleteUser, updateUser } from "../../api/query/user.query";
-import { logout } from "../../slices/auth.slice";
+import { login, logout, update } from "../../slices/auth.slice";
 
 import Input from "../Input";
 import Button from "../Button";
@@ -57,6 +57,7 @@ export default function ProfileDisplay() {
   const onSubmit = async (data: FieldValues) => {
     try {
       const response = await updateUser(user.id, data as UpdateUserType);
+      dispatch(update({ user: data }));
       console.log(response);
       setIsEditing(true);
     } catch (error) {
